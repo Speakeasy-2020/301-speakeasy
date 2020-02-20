@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>alive</title>
+    <!-- <link rel="text/css" href="./style.css"> -->
+    <style>
+      body{
+        color: white;
+        background-color: black;
+        width: auto;
+      }
+      #testImg {
+        /* width: auto !important;
+        margin: auto; */
+        max-width: 100%;
+        /* max-width: inherit; */
+        /* width: auto; */
+      }
+      @media screen and (min-width: 320px) {
+  body {
+    background-color: green;
+  }
+}
+
+@media screen and (min-width: 550px) {
+  body {
+    background-color: yellow;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    background-color: orange;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  body {
+    background-color: red;
+  }
+}
+
+    </style>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <p>alive</p>
+    <div>
+      <h3>an h3</h3>
+    </div>
+
+    <img id="my_img" src="text_image.jpg" />
+    <script>
+      // $('img#my_img').on('click', function(){
+      //   $(this).src('new_text_image.jpg');
+      // });
+      $('img#my_img').on('click', function(event){
+        $(this).attr({src: 'new_text_image.jpg' });
+      });
+    </script>
+
+    <!-- <img> -->
+
+    <!-- <script>
+      $('<img>', {
+        src: 'http://placekitten.com/201/301',
+        alt: 'A random kitten',
+        title: 'The kitten is fuzzy and cute'
+      });
+    </script> -->
+
+    <!-- <img id="testImg" src="https://static.boredpanda.com/blog/wp-content/uploads/2020/01/funny-dog-teeth-toofers-coverimage.jpg" /> -->
+  </body>
+</html>
