@@ -1,5 +1,13 @@
 # 301-speakeasy
 A space for our final Code Fellows 301 group project!
+
+### Team Members
+* Kai Hansen
+* Kory Jackson
+* Daniel Nguyen
+* Brett Packard
+* Thomas Sherer
+
  
 ## Elements still needed
 * Wireframes
