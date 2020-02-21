@@ -19,7 +19,12 @@ A space for our final Code Fellows 301 group project!
 - [x] Team Agreement
 
 ## Wireframes
+
+### Draft 1
 ![wireframes](img.readme/301-speakeasy-project-Wireframes.jpg)
+
+### Draft 2
+![wireframes](img.readme/301-speakeasy-project-Wireframes-2.jpg)
 
 ## Team Agreement
 
