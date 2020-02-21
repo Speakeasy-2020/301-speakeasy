@@ -81,4 +81,10 @@ Working - version x.x.X
 
 **6:20pm:** Wireframes have been added to the readme.
 
-**6:30pm:** Starting work on domain modeling.
+**6:30pm:** Starting work on domain modeling. Hoping we can get base page structures built out tonight. Get views set up. Get them linked to each other etc. As well as getting domain model built.
+
+**6:45pm:** Got the team together. Daniel is building out domain model. Brett is working on data schema for SQL tables. Kai and Thomas are building out scaffolding for basic page/route building. Kory is at home and is looking into the APIs to get a better idea of how we can pull from those.
+
+**8:15pm:** John came in for standup. He suggested that we cut out some features. Rather than incorporate ingredients and amounts, we will simply focus on drinks as the only items. That cuts out lots of the complications for us. So we are gonna pivot to that direction.
+
+**9:15pm:** We are still working on building out domain model and schema after John’s redirection. We stood up and worked out more flow ideas. We will be getting rid of the ingredients page and will also be redoing how the Menu Builder page will work. Lots of moving parts here. Still very little code written. We are going to try and do some catchup work at home regarding domain model, data schema, and page scaffolding. That way we can really get into coding on Saturday. Kory should be here as well as he's feeling better. 
