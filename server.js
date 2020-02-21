@@ -1,19 +1,30 @@
 // 'use strict'
 
+require('dotenv').config();
 const express = require('express');
 const app = express();
-require('dotenv');
+const pg = require('pg');
 
-app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }) })
+app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
 // does nothing without app.listen
 // app.listen(3000)
 //   .then(console.log('alive on 3000'))
 //   .catch(console.log('uh og'))
 function startServer(){
   const port = process.env.PORT || 3000;
-  app.listen(port)
-    // .then(() => console.log(`Server Listening on ${port}`))
-    // .catch(err => console.error(err));
-};
+  app.listen(port);
+  // .then(() => console.log(`Server Listening on ${port}`))
+  // .catch(err => console.error(err));
+}
+
+function navBar() {
+  var x = document.getElementById("myLinks");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+//app.set('view engine', 'ejs');
 
 startServer();
