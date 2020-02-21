@@ -20,16 +20,12 @@ A space for our final Code Fellows 301 group project!
 
 ## Wireframes
 
-### Draft 1
-![wireframes](img.readme/301-speakeasy-project-Wireframes.jpg)
 
-### Draft 2
-![wireframes](img.readme/301-speakeasy-project-Wireframes-2.jpg)
+![wireframes](img.readme/301-speakeasy-project-Wireframes-3.jpg)
 
 ## Domain Model
 
-### Draft 1
-![domain model](img.readme/301-speakeasy-project-Domain%20Model.jpg)
+![domain model](img.readme/301-speakeasy-project-DomainModel-2.jpg)
 
 ## Team Agreement
 
