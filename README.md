@@ -29,7 +29,7 @@ A space for our final Code Fellows 301 group project!
 ## Domain Model
 
 ### Draft 1
-![domain model](img.readme/301-speakeasy-project-Domain Model.jpg)
+![domain model](img.readme/301-speakeasy-project-Domain%20Model.jpg)
 
 ## Team Agreement
 
