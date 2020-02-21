@@ -21,7 +21,7 @@ A space for our final Code Fellows 301 group project!
 * Project Summary
 
 ## Wireframes
-![wireframes](https://imgur.com/AGVzi3a)
+![wireframes](img.readme/301-speakeasy-project-Wireframes.jpg)
 
 ## Change Log
 
