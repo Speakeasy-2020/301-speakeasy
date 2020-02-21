@@ -65,7 +65,7 @@ Working - version x.x.X
 
 **9:00pm:** We spoke to Cory and Leo. They helped us visualize the way we will need to structure the data. We will need to make many different SQL tables. Turns out this will be much more complicated than we thought. Brett and Thomas are trying to get something barebones deployed so we can at least have something living out there. Daniel has added our domain model and wireframes to a basic draw.io template. He will try to get those fleshed out before we meet for tomorrow’s session. Then we can begin proper coding.
 
-## Day 4 // 2020.02.20
+### Day 4 // 2020.02.20
 
 **5:00pm:** Got to class early to work on the wireframes. 
 
