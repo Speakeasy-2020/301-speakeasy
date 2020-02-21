@@ -13,7 +13,7 @@ A space for our final Code Fellows 301 group project!
 - [ ] Link to project board
 - [ ] User Stories
 - [x] Wireframes
-- [ ] DOM model
+- [x] DOM model
 - [ ] Database Entity-Relationship-Diagram
 - [ ] Software requirements doc
 - [x] Team Agreement
@@ -25,6 +25,11 @@ A space for our final Code Fellows 301 group project!
 
 ### Draft 2
 ![wireframes](img.readme/301-speakeasy-project-Wireframes-2.jpg)
+
+## Domain Model
+
+### Draft 1
+![domain model](img.readme/301-speakeasy-project-Domain Model.jpg)
 
 ## Team Agreement
 
