@@ -32,7 +32,9 @@ A space for our final Code Fellows 301 group project!
 **Git process:** The GIT flow is that the Master branch is gold but PROD is God. To push to PROD, 3 people must approve the merge request, but ONLY after they each fully test the code and make sure it is functioning properly. To push to Master, 3 people must approve the merge request. Testing is not necessary. The naming system is as follows:
 
 PROD - version X.x.x
+
 Master - version x.X.x
+
 Working - version x.x.X
 
 **Any thing else you feel is important:** Unless necessary during the last several days before final presentations, there are no expectations to complete work on the project aside from the assigned meeting times. The team agrees to try to finish the projects a day before presentations so there is adequate time to prepare for the presentations themselves. The team also understands that the time frames for expected responses on Slack will be between 5pm-10pm on Mondays-Fridays and between 7am-10pm on Saturdays and Sundays.
