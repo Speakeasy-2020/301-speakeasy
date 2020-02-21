@@ -20,6 +20,9 @@ A space for our final Code Fellows 301 group project!
 * Team Agreement
 * Project Summary
 
+## Wireframes
+![wireframes](https://imgur.com/AGVzi3a)
+
 ## Change Log
 
 ### Day 1 // 2020.02.17
