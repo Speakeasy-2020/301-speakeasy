@@ -20,16 +20,23 @@
       <div id="guestform">
         <form>
          <label for="guestname">Name of guest:</label><br>
-         <input type="text" id="guestname" name="guestname"  value="Enter name here"></form>
+         <input type="text" id="guestname" name="guestname"  value="Enter name here"><br>
          <input type="submit" value="Submit">
+         <!-- this submit button should add guest to database and display to guestDisplay div -->
         </form>
       </div>
-      <div>
+      <div id="guestDisplay">
+        <form>
+          <fieldset>
+            <legend>Guest List</legend>
+          </fieldset>
+        </form>
+
       </div>
       
+      <button id="save" type="button">Save Guests</button>
       <footer>
           <!-- replace this with a partial? -->
-        <button id="save" type="button">Save Guests</button>
       </footer>
     <!-- </div> -->
     <script src="/js/index.js"></script>
