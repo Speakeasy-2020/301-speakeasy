@@ -1,10 +1,9 @@
-'use strict'
+'use strict';
 
 require('dotenv').config();
 const express = require('express');
 const app = express();
 const superagent = require('superagent');
-
 
 const pg = require('pg');
 
@@ -20,9 +19,6 @@ function startServer(){
     // .catch(err => console.error(err));
 }
 
-
-
-
 function drinkRender() {
   let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=egg+nog`;
   superagent.get(url)
@@ -32,7 +28,6 @@ function drinkRender() {
     });
 }
 
-
 function Drinks(info) {
   this.name = info.strDrink;
   this.glass = info.strGlass;
@@ -40,9 +35,7 @@ function Drinks(info) {
   this.instructions = info.strInstructions;
   this.ingredient = [info.strIngredient1, info.strIngredient2, info.strIngredient3, info.strIngredient4, info.strIngredient5, info.strIngredient6, info.strIngredient7, info.strIngredient8, info.strIngredient9, info.strIngredient10, info.strIngredient11];
 }
-
 drinkRender();
-
 
 function navBar() {
   var x = document.getElementById("myLinks");
