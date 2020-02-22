@@ -19,3 +19,9 @@ footer {
     display: block;
     float: center;
   }
+
+#guestDisplay {
+  background-color: pink;
+  width: 75%;
+  height: 60%;
+}
