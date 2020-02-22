@@ -4,26 +4,13 @@
     <meta charset="UTF-8">
     <title>Speakeasy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/public/reset.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/public/style.css">
-    
+      <%- include(partials/header.ejs) %>    
   </head>
   <body>
     <!-- <div class="mobile-container"> -->
       <header>
         <div class="topnav">
-          <a href="#home" class="active">Welcome to Speakeasy!</a>
-          <div id="myLinks">
-            <a href="#guestlist">Guest List</a>
-            <a href="#eventcopy">Event Copy</a>
-            <a href="#menubuilder">Menu Builder</a>
-            <a href="#ingredients">Ingredients</a>
-            <a href="#publicview">Public View</a>
-          </div>
-          <a href="javascript:void(0);" class="icon" onclick="navBar()">
-            <i class="fa fa-bars"></i>
-          </a>
+          <%- include(partials/navBar.ejs) %>
         </div>
       </header>
 
@@ -41,7 +28,7 @@
         <button id="saved" type="button">Saved Event</button>
       </footer>
     <!-- </div> -->
+    <script src="/js/index.js"></script>
       
-    <script src="/server.js"></script>
   </body>
 </html>

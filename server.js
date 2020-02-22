@@ -4,27 +4,43 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const superagent = require('superagent');
-
 const pg = require('pg');
 
-app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
-// does nothing without app.listen
-// app.listen(3000)
-//   .then(console.log('alive on 3000'))
-//   .catch(console.log('uh og'))
-function startServer(){
-  const port = process.env.PORT || 3000;
-  app.listen(port)
-    // .then(() => console.log(`Server Listening on ${port}`))
-    // .catch(err => console.error(err));
+
+// app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
+app.use(express.static('/public'));
+app.use(express.urlencoded({ extended: true, }));
+app.set('view engine', 'ejs');
+
+// Server endpoints
+app.get('/', homePage);
+app.get('/events', eventRender);
+app.get('/guestList', guestListRender);
+app.get('/menuRender', drinkRender);
+app.get('/publicViews', publicPage);
+
+
+function homePage(req, res) {
+  res.render('pages/index.ejs');
 }
 
+function eventRender(req, res) {
+  res.render('pages/main/event');
+}
+
+function guestListRender(req, res) {
+  res.render('pages/main/guestList');
+}
+
+function publicPage(req, res) {
+  res.render('pages/main/publicView');
+}
 function drinkRender() {
   let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=egg+nog`;
   superagent.get(url)
     .then(data => {
       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
-      console.log(drinkResults);
+      // console.log(drinkResults);
     });
 }
 
@@ -37,14 +53,11 @@ function Drinks(info) {
 }
 drinkRender();
 
-function navBar() {
-  var x = document.getElementById("myLinks");
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
-  }
-}
-//app.set('view engine', 'ejs');
 
+app.get('*', (req, response) => response.status(404).send('This route does not exist'));
+
+function startServer(){
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server up on port ${PORT}`));
+}
 startServer();
