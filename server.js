@@ -1,12 +1,14 @@
 'use strict'
 
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const superagent = require('superagent');
-require('dotenv');
 
 
-app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }) })
+const pg = require('pg');
+
+app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
 // does nothing without app.listen
 // app.listen(3000)
 //   .then(console.log('alive on 3000'))
@@ -39,5 +41,20 @@ function Drinks(info) {
 }
 
 drinkRender();
+
+  app.listen(port);
+  // .then(() => console.log(`Server Listening on ${port}`))
+  // .catch(err => console.error(err));
+}
+
+function navBar() {
+  var x = document.getElementById("myLinks");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+//app.set('view engine', 'ejs');
 
 startServer();

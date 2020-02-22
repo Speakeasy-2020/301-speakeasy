@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
+    "pg": "^7.18.2",
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
     "superagent": "^5.2.2"
   },
@@ -23,4 +25,5 @@
     "url": "https://github.com/Speakeasy-2020/301-speakeasy/issues"
   },
   "homepage": "https://github.com/Speakeasy-2020/301-speakeasy#readme"
+  }
 }
