@@ -40,15 +40,15 @@ INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Brett', 1, FALSE);
 
 -- View: A specific cocktailID
 -- cocktailID: 11016
-SELECT
-  drinkTitle AS drink,
-  thumbnail AS imageURL,
-  instructions,
-  glass
-FROM
-  drinks
-WHERE 
-  cocktailID = 11016
+-- SELECT
+--   drinkTitle AS drink,
+--   thumbnail AS imageURL,
+--   instructions,
+--   glass
+-- FROM
+--   drinks
+-- WHERE 
+--   cocktailID = 11016
 
 
 -- userID: 'Rubiksron', eventsID: 1
