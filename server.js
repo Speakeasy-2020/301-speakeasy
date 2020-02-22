@@ -8,7 +8,7 @@ const pg = require('pg');
 
 
 // app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
-app.use(express.static('./public'));
+app.use(express.static('/public'));
 app.use(express.urlencoded({ extended: true, }));
 app.set('view engine', 'ejs');
 
@@ -20,19 +20,19 @@ app.get('/menuRender', drinkRender);
 app.get('/publicViews', publicPage);
 
 
-function homePage(res, req) {
-  res.send('pages/index.ejs');
+function homePage(req, res) {
+  res.render('pages/index.ejs');
 }
 
-function eventRender(res, req) {
+function eventRender(req, res) {
   res.render('pages/main/event');
 }
 
-function guestListRender(res,req) {
+function guestListRender(req, res) {
   res.render('pages/main/guestList');
 }
 
-function publicPage(res, req) {
+function publicPage(req, res) {
   res.render('pages/main/publicView');
 }
 function drinkRender() {
@@ -55,14 +55,6 @@ function Drinks(info) {
 
 drinkRender();
 
-function navBar() {
-  var x = document.getElementById("myLinks");
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
-  }
-}
 
 app.get('*', (req, response) => response.status(404).send('This route does not exist'));
 
