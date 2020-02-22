@@ -8,7 +8,7 @@ const pg = require('pg');
 
 
 // app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
-app.use(express.static('/public'));
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true, }));
 app.set('view engine', 'ejs');
 
