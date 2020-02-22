@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speakeasy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include('../partials/header.ejs') %> 
+    
+  </head>
+  <body>
+    <!-- <div class="mobile-container"> -->
+      <header>
+        <div class="topnav">
+          <%- include('../partials/navBar.ejs') %>
+        </div>
+      </header>
+      <main>
+          <h2>  </h2>
+      </main>
+
+      <div id="eventform">
+        <form>
+         <label for="guestname">Name of guest:</label><br>
+         <input type="text" id="guestname" name="guestname"  value="Enter name here"></form>
+         <input type="submit" value="Submit">
+        </form>
+      </div>
+      <div>
+      </div>
+      
+      <footer>
+          <!-- replace this with a partial? -->
+        <button id="save" type="button">Save Guests</button>
+      </footer>
+    <!-- </div> -->
+    <script src="/js/index.js"></script>
+  </body>
+</html>
