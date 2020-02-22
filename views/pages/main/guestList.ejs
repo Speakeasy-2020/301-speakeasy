@@ -11,34 +11,36 @@
     <!-- <div class="mobile-container"> -->
       <header>
         <div class="topnav">
-          <a href="#home" class="active">Guest List</a>
-          <div id="myLinks">
-            <a href="#guestlist">Guest List</a>
-            <a href="#eventcopy">Event Copy</a>
-            <a href="#menubuilder">Menu Builder</a>
-            <a href="#ingredients">Ingredients</a>
-            <a href="#publicview">Public View</a>
-          </div>
-          <a href="javascript:void(0);" class="icon" onclick="navBar()">
-            <i class="fa fa-bars"></i>
-          </a>
+          <%- include('../partials/navBar.ejs') %>
         </div>
       </header>
-
 
       <div id="guestform">
         <form>
          <label for="guestname">Name of guest:</label><br>
-         <input type="text" id="guestname" name="guestname"  value="Enter name here"></form>
+         <input type="text" id="guestname" name="guestname"  value="Enter name here"><br>
          <input type="submit" value="Submit">
+         <!-- this submit button should add guest to database and display to guestDisplay div -->
         </form>
       </div>
-      <div>
-      </div>
-      
+
+      <section id="guestDisplay">
+        <div class="guestDiv">
+          <h2>
+            Guest Names
+          </h2>
+          <p>
+            List of Names
+          </p>
+        </div>
+      </section>
+     
+      <form action="/menuRender" method="post" class="guestSubmit">
+        <button id="save">Save Guests</button>
+      </form>
+
       <footer>
           <!-- replace this with a partial? -->
-        <button id="save" type="button">Save Guests</button>
       </footer>
     <!-- </div> -->
     <script src="/js/index.js"></script>

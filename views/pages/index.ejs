@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Speakeasy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-      <%- include('partials/header.ejs') %>    
+    <%- include('partials/header.ejs') %>    
   </head>
   <body>
     <!-- <div class="mobile-container"> -->
@@ -16,18 +16,18 @@
 
 
       <div id="form">
-        <form>
+        <form id="newuser" action="/event" method="post" class="newUserButton">
          <label for="username">Name of user:</label><br>
-         <input type="text" id="username" name="username"  value="Enter name here"></form>
-         <input type="submit" value="Submit">
+         <input type="text" id="username" name="username" placeholder="Enter name here" required></br>
+         <button id="eventnamesubmit" type="submit" value="Submit">Submit</button>
         </form>
       </div>
-      
+
       <footer>
-        <button id="new" type="button" >New Event</button></br>
+
       </footer>
     <!-- </div> -->
-    <script src="/js/index.js"></script>
+    <script src="js/index.js"></script>
       
   </body>
 </html>

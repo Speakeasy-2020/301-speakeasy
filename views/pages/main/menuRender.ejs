@@ -11,36 +11,52 @@
     <!-- <div class="mobile-container"> -->
       <header>
         <div class="topnav">
-          <a href="#home" class="active">Event Details</a>
-          <div id="myLinks">
-            <a href="#guestlist">Guest List</a>
-            <a href="#eventcopy">Event Copy</a>
-            <a href="#menubuilder">Menu Builder</a>
-            <a href="#ingredients">Ingredients</a>
-            <a href="#publicview">Public View</a>
-          </div>
-          <a href="javascript:void(0);" class="icon" onclick="navBar()">
-            <i class="fa fa-bars"></i>
-          </a>
+          <%- include('../partials/navBar.ejs') %>
         </div>
+        
       </header>
       <main>
           <h2>  </h2>
-      </main>
-
-      <div id="eventform">
-        <form>
-         <label for="guestname">Name of guest:</label><br>
-         <input type="text" id="guestname" name="guestname"  value="Enter name here"></form>
-         <input type="submit" value="Submit">
+        <div>
+          <h2>Look for a drink!!</h2>
+          <form action="/drinksRender" method="GET" >
+          <input type="text" name="search" placeholder="Enter A Drink">
+          <button type="submit">Take A Look</button>
+          </form>
+        </div>
+        <section id="menuSection">
+          <div class="menuItems">
+            <h2> Drink Name   
+            </h2>
+            <p> Instructions</p>
+            <img src="" alt="">
+            <h3>Ingredients</h3>
+            <ul>
+              <li>Ingredient 1</li>
+              <li>Ingredient 2</li>
+              <li>Ingredient 3</li>
+              <li>Ingredient 4</li>
+              <li>Ingredient 5</li>
+            </ul>
+            <form action="/drinksDatabase" method="POST">
+            <button >Save To Menu</button>
+            </form>
+          </div>
+        </section>
+        <section id="savedMenu">
+          <h2> Saved Menu </h2>
+          <div class="DBMenuItem">
+            <h3> Drink Name </h3>
+            <img src="" alt="" class="">
+          </div>
+        </section>
+        <form action="/publicView" method="GET">
+        <button>Save</button>
         </form>
-      </div>
-      <div>
-      </div>
-      
+      </main>      
       <footer>
           <!-- replace this with a partial? -->
-        <button id="save" type="button">Save Guests</button>
+  
       </footer>
     <!-- </div> -->
     <script src="/js/index.js"></script>

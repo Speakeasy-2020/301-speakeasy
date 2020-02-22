@@ -9,7 +9,7 @@
 
 .topnav {
     overflow: hidden;
-    background-color: #333;
+    background-color: rgba(223, 216, 195, 0.3);
     position: relative;
   }
 
@@ -19,3 +19,56 @@ footer {
     display: block;
     float: center;
   }
+
+#guestDisplay {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 75%;
+  height: 20em;
+  display: flex;
+  justify-content: center;
+}
+
+#menuSection {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 75%;
+  height: 20em;
+  display: flex;
+  justify-content: center;
+  margin: 5% auto;
+}
+
+#savedMenu {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 75%;
+  text-align: center;
+  margin: 10% auto;
+  height: 10em;
+  border-radius: 12px;
+}
+
+#publicEventName {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 75%;
+  text-align: center;
+  margin: 5% auto;
+  height: 10em;
+  border-radius: 25px;
+}
+
+#publicGuestDisplay {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 75%;
+  text-align: center;
+  margin: 5% auto;
+  height: 10em;
+  border-radius: 25px;
+}
+
+#publicMenuDisplay {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 75%;
+  text-align: center;
+  margin: 5% auto;
+  height: 10em;
+  border-radius: 25px;
+}
