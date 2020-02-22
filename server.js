@@ -6,7 +6,6 @@ const app = express();
 const superagent = require('superagent');
 const pg = require('pg');
 
-
 // app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true, }));
@@ -19,10 +18,10 @@ app.get('/guestList', guestListRender);
 app.get('/menuRender', drinkRender);
 app.get('/publicView', publicPage);
 
+
 app.post('/event', (req, res) => {
   res.render('pages/main/event.ejs');
 })
-
 
 function homePage(req, res) {
   res.render('pages/index.ejs');
@@ -56,7 +55,6 @@ function Drinks(info) {
   this.ingredient = [info.strIngredient1, info.strIngredient2, info.strIngredient3, info.strIngredient4, info.strIngredient5, info.strIngredient6, info.strIngredient7, info.strIngredient8, info.strIngredient9, info.strIngredient10, info.strIngredient11];
 }
 drinkRender();
-
 
 app.get('*', (req, response) => response.status(404).send('This route does not exist'));
 
