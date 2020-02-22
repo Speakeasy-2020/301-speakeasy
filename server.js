@@ -5,7 +5,6 @@ const express = require('express');
 const app = express();
 const superagent = require('superagent');
 
-
 const pg = require('pg');
 
 app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
@@ -20,9 +19,6 @@ function startServer(){
   // .catch(err => console.error(err));
 }
 
-
-
-
 function drinkRender() {
   let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=egg+nog`;
   superagent.get(url)
@@ -31,7 +27,6 @@ function drinkRender() {
       console.log(drinkResults);
     });
 }
-
 
 function Drinks(info) {
   this.name = info.strDrink;
