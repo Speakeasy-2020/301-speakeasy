@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 const superagent = require('superagent');
 const pg = require('pg');
+const client = new pg.Client(process.env.DATABASE_URL);
 
 // app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
 app.use(express.static('public'));
@@ -19,9 +20,21 @@ app.get('/menuRender', menuPage);
 app.get('/publicView', publicPage);
 
 
-app.post('/event', (req, res) => {
-  res.render('pages/main/event.ejs');
-});
+app.post('/event', storeUser);
+
+function storeUser (request, response) {
+  let username = request.body.username;
+  let SQL = `
+  INSERT INTO users (userName)
+  VALUES ($1)`;
+  let values = [username];
+  console.log(request.body.username);
+  // app.locals.activeUser = request;
+  client.query(SQL, values)
+    .then( () => {
+      response.render('pages/main/event.ejs');
+    });
+}
 
 app.post('/guestList', (req, res) => {
   res.render('pages/main/guestList.ejs');
@@ -73,8 +86,14 @@ function Drinks(info) {
 
 app.get('*', (req, response) => response.status(404).send('This route does not exist'));
 
-function startServer(){
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => console.log(`Server up on port ${PORT}`));
-}
-startServer();
+// function startServer(){
+//   const PORT = process.env.PORT || 3000;
+//   app.listen(PORT, () => console.log(`Server up on port ${PORT}`));
+// }
+// startServer();
+
+client.connect()
+  .then(() => {
+    app.listen(process.env.PORT, () => console.log(`up on ${process.env.PORT}`));
+  })
+  .catch(() => console.log('port client issue'));
