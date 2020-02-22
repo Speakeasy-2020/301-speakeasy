@@ -8,7 +8,7 @@ const pg = require('pg');
 
 
 // app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
-app.use(express.static('/public'));
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true, }));
 app.set('view engine', 'ejs');
 
@@ -35,7 +35,7 @@ function guestListRender(req, res) {
 function publicPage(req, res) {
   res.render('pages/main/publicView');
 }
-function drinkRender() {
+function drinkRender(req, res) {
   let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=egg+nog`;
   superagent.get(url)
     .then(data => {
