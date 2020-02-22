@@ -17,7 +17,7 @@ app.get('/', homePage);
 app.get('/events', eventRender);
 app.get('/guestList', guestListRender);
 app.get('/menuRender', drinkRender);
-app.get('/publicViews', publicPage);
+app.get('/publicView', publicPage);
 
 
 function homePage(req, res) {
