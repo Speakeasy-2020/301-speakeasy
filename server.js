@@ -43,10 +43,6 @@ function Drinks(info) {
 
 drinkRender();
 
-  app.listen(port);
-  // .then(() => console.log(`Server Listening on ${port}`))
-  // .catch(err => console.error(err));
-}
 
 function navBar() {
   var x = document.getElementById("myLinks");
