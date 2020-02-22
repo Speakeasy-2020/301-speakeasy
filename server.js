@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 require('dotenv').config();
 const express = require('express');
@@ -15,9 +15,9 @@ app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); }
 //   .catch(console.log('uh og'))
 function startServer(){
   const port = process.env.PORT || 3000;
-  app.listen(port)
-    // .then(() => console.log(`Server Listening on ${port}`))
-    // .catch(err => console.error(err));
+  app.listen(port);
+  // .then(() => console.log(`Server Listening on ${port}`))
+  // .catch(err => console.error(err));
 }
 
 
@@ -43,17 +43,12 @@ function Drinks(info) {
 
 drinkRender();
 
-  app.listen(port);
-  // .then(() => console.log(`Server Listening on ${port}`))
-  // .catch(err => console.error(err));
-}
-
 function navBar() {
-  var x = document.getElementById("myLinks");
-  if (x.style.display === "block") {
-    x.style.display = "none";
+  var x = document.getElementById('myLinks');
+  if (x.style.display === 'block') {
+    x.style.display = 'none';
   } else {
-    x.style.display = "block";
+    x.style.display = 'block';
   }
 }
 //app.set('view engine', 'ejs');
