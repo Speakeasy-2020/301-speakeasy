@@ -6,45 +6,45 @@ DROP TABLE IF EXISTS recipes;
 DROP TABLE IF EXISTS eventsMenus;
 
 CREATE TABLE users (
-  id PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   userName VARCHAR(32)
 );
 
 CREATE TABLE guests (
-  id PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   guestName VARCHAR(32),
-  eventsID NUMBER,
+  eventsID INTEGER,
   isChecked BOOLEAN
-)
+);
 
 CREATE TABLE events (
-  id PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   eventsOwner VARCHAR(32),
   title VARCHAR(64),
   date VARCHAR(64),
   location VARCHAR(128),
   description VARCHAR(255),
-  cocktailList NUMBER
+  cocktailList INTEGER
 );
 
 CREATE TABLE drinks (
-  id PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   drinkTitle VARCHAR(64),
-  cocktailID NUMBER,
+  cocktailID INTEGER,
   thumbnail TEXT,
   instructions TEXT,
-  glass VARCHAR(32),
+  glass VARCHAR(32)
 );
 
 CREATE TABLE recipes (
-  id PRIMARY KEY,
-  cocktailID NUMBER,
+  id SERIAL PRIMARY KEY,
+  cocktailID INTEGER,
   ingredient VARCHAR(32)
 );
 
 CREATE TABLE eventsMenus (
-  id PRIMARY KEY,
-  eventsID NUMBER,
-  cocktailID NUMBER,
+  id SERIAL PRIMARY KEY,
+  eventsID INTEGER,
+  cocktailID INTEGER,
   isChecked BOOLEAN
 );

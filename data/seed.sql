@@ -5,7 +5,7 @@ INSERT INTO users (userName) VALUES ('Rubiksron');
 -- Going forward, we need to hold onto a value here. Probably best to hold onto userName (Rubiksron), as that's completely unique, and that will be set in our app.local variables
 
 -- The next thing they'll do is to create an event. The cocktailList column is NULL for now, this will involve an update query later.
-INSERT INTO events (title, eventsOwner, date, location, description, cocktailList) VALUES ('Class party', 'Rubiksron', 1583003647, 'Ada Lovelace Classroom, Codefellows, Seattle, WA', `What a great class, let's have a celebration for everybody!`, NULL);
+INSERT INTO events (title, eventsOwner, date, location, description) VALUES ('Class party', 'Rubiksron', 1583003647, 'Ada Lovelace Classroom, Codefellows, Seattle, WA', 'What a great class, we should have a celebration for everybody!');
 -- Like the userName, we'll need to hold onto the event name in app.local as well.
 
 -- Next, the user will create a list of drinks to add. We'll pull three cocktails from the cocktaildb API, modeled after Kory's constructor function
