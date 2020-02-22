@@ -21,7 +21,15 @@ app.get('/publicView', publicPage);
 
 app.post('/event', (req, res) => {
   res.render('pages/main/event.ejs');
-})
+});
+
+app.post('/guestList', (req, res) => {
+  res.render('pages/main/guestList.ejs');
+});
+
+app.post('/menuRender', (req, res) => {
+  res.render('pages/main/menuRender.ejs');
+});
 
 function homePage(req, res) {
   res.render('pages/index.ejs');
