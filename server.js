@@ -35,7 +35,6 @@ function Drinks(info) {
   this.instructions = info.strInstructions;
   this.ingredient = [info.strIngredient1, info.strIngredient2, info.strIngredient3, info.strIngredient4, info.strIngredient5, info.strIngredient6, info.strIngredient7, info.strIngredient8, info.strIngredient9, info.strIngredient10, info.strIngredient11];
 }
-
 drinkRender();
 
 function navBar() {
