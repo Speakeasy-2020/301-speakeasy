@@ -7,7 +7,7 @@ const superagent = require('superagent');
 const pg = require('pg');
 
 // app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
-app.use(express.static('/public'));
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true, }));
 app.set('view engine', 'ejs');
 
@@ -16,7 +16,7 @@ app.get('/', homePage);
 app.get('/events', eventRender);
 app.get('/guestList', guestListRender);
 app.get('/menuRender', drinkRender);
-app.get('/publicViews', publicPage);
+app.get('/publicView', publicPage);
 
 function homePage(req, res) {
   res.render('pages/index.ejs');
