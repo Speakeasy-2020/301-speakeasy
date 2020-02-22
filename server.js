@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 app.get('/', homePage);
 app.get('/event', eventRender);
 app.get('/guestList', guestListRender);
-app.get('/menuRender', drinkRender);
+app.get('/menuRender', menuPage);
 app.get('/publicView', publicPage);
 
 
@@ -38,23 +38,30 @@ function guestListRender(req, res) {
 function publicPage(req, res) {
   res.render('pages/main/publicView');
 }
-function drinkRender() {
+
+function menuPage(req, res) {
+  res.render('pages/main/menuRender');
+}
+
+
+function drinkRender(req, res) {
   let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=egg+nog`;
+  
   superagent.get(url)
     .then(data => {
       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
-      // console.log(drinkResults);
+      res.render('pages/main/menuRender', {searchResults: drinkResults, });
     });
 }
 
 function Drinks(info) {
+  this.id = info.idDrink;
   this.name = info.strDrink;
   this.glass = info.strGlass;
   this.image = info.strDrinkThumb;
   this.instructions = info.strInstructions;
   this.ingredient = [info.strIngredient1, info.strIngredient2, info.strIngredient3, info.strIngredient4, info.strIngredient5, info.strIngredient6, info.strIngredient7, info.strIngredient8, info.strIngredient9, info.strIngredient10, info.strIngredient11];
 }
-drinkRender();
 
 app.get('*', (req, response) => response.status(404).send('This route does not exist'));
 
