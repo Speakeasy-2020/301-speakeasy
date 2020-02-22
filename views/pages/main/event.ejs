@@ -13,15 +13,19 @@
         <div class="topnav">
           <%- include('../partials/navBar.ejs') %>
         </div>
+       
       </header>
       <main>
-          <h2>  </h2>
+          <h1>Enter your event details </h1>
       </main>
 
       <div id="eventform">
+
         <form>
-         <label for="guestname">Name of guest:</label><br>
-         <input type="text" id="guestname" name="guestname"  value="Enter name here"></form>
+         <label for="eventName">Enter event name below</label><br>
+         <input type="text" id="eventName" name="eventName"  value="Enter event name here"><br>
+         <label for="eventDetails">Enter event details below</label><br>
+         <input type="text" id="eventDetails" name="eventDetails" value="Enter event details here"><br>
          <input type="submit" value="Submit">
         </form>
       </div>
@@ -30,7 +34,7 @@
       
       <footer>
           <!-- replace this with a partial? -->
-        <button id="save" type="button">Save Guests</button>
+      
       </footer>
     <!-- </div> -->
     <script src="/js/index.js"></script>
