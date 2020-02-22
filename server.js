@@ -14,10 +14,14 @@ app.set('view engine', 'ejs');
 
 // Server endpoints
 app.get('/', homePage);
-app.get('/events', eventRender);
+app.get('/event', eventRender);
 app.get('/guestList', guestListRender);
 app.get('/menuRender', drinkRender);
 app.get('/publicView', publicPage);
+
+app.post('/event', (req, res) => {
+  res.render('pages/main/event.ejs');
+})
 
 
 function homePage(req, res) {
@@ -25,7 +29,7 @@ function homePage(req, res) {
 }
 
 function eventRender(req, res) {
-  res.render('pages/main/event');
+  res.render('pages/main/event.ejs');
 }
 
 function guestListRender(req, res) {
