@@ -7,7 +7,7 @@ const superagent = require('superagent');
 
 const pg = require('pg');
 
-app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
+app.get('*', (req, res) => { res.sendFile('index.ejs', { root: './views/pages/' }); });
 // does nothing without app.listen
 // app.listen(3000)
 //   .then(console.log('alive on 3000'))
@@ -45,6 +45,6 @@ function navBar() {
     x.style.display = "block";
   }
 }
-//app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
 startServer();
