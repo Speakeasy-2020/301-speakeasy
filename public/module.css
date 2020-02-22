@@ -3,15 +3,17 @@
   }
   
   .topnav a {
-    color: white;
+    color: black;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 25px;
     display: block;
+    text-align: center;
   }
   
   .topnav a.icon {
-    background: black;
+    background: rgba(0, 0, 0, 0.57);
+    color: #eeeedd;
     display: block;
     position: absolute;
     right: 0;
@@ -19,11 +21,11 @@
   }
   
   .topnav a:hover {
-    background-color: #ddd;
+    background-color: #ddc04e2e;
     color: black;
   }
   
   .active {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #b58b3860;
+    color: black;
   }
