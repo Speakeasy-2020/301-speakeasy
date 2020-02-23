@@ -38,7 +38,8 @@ INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Brett', 1, FALSE);
 
 
 
--- Let's add a full dataset for a second user and event
+
+-- Now, let's add a full dataset for a second user and event
 INSERT INTO users (userName) VALUES ('John Cokos');
 INSERT INTO events (title, eventsOwner, date, location, description) VALUES ('Birthday Bash for Jason', 'John Cokos', 1583003647, 'Alan Turing Room, CF, SEA, WA', 'Has anybody seen JAYSAWN?');
 INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Bumble Bee #1', 14538, 'https://www.thecocktaildb.com/images/media/drink/uwqpvv1461866378.jpg', 'A really long description', 'Shot Glass');
