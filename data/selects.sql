@@ -41,6 +41,7 @@ WHERE
 -- This is important because we need to render details about the event itself on the public view page.
 -- table = events
 -- id = 2
+-- eventsOwner = 'John Cokos'
 SELECT
   * -- Available columns are id, eventsOwner, title, date (epoch time), location, and description.
 FROM
@@ -50,11 +51,14 @@ WHERE
   AND eventsOwner = 'John Cokos'; -- This value is not needed! I've only included it to show that it can be used. This variable can be found at app.locals.activeUser (if set). But it should not be used alone, an events id is needed, as there may be multiple events under a user.
 
 
--- 
-
-
-
-
-
-
--- userID: 'Rubiksron', eventsID: 1
+-- View: All events owned by a given user.
+-- This is important because if there's an activeUser set, we want to display links to the user's events when they're on the home page.
+-- table = events
+-- eventsOwner = 'John Cokos'
+SELECT
+  title,
+  to_timestamp(TRUNC(CAST(date AS bigint))) -- This converts the UNIX time to human readable. The format is: 2020-02-29 11:14:07-08. Note the '-08' at the end, keep in mind that's a timezone. Also, I don't really have a grasp on TRUNC or CAST. I google'd for this shit, I usually use FROM_UNIXTIME() at work.
+FROM
+  events
+WHERE
+  eventsOwner = 'John Cokos'; -- This value is THE VARIABLE!! Use app.locals.activeUser for this value when you build this query.
