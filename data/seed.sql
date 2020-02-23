@@ -11,7 +11,7 @@ INSERT INTO events (title, eventsOwner, date, location, description) VALUES ('Cl
 -- Next, the user will create a list of drinks to add. We'll pull three cocktails from the cocktaildb API, modeled after Kory's constructor function
 INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Grizzly Bear', 12762, 'https://www.thecocktaildb.com/images/media/drink/k6v97f1487602550.jpg', 'Served over ice. Sounds nasty, but tastes great.', 'Collins Glass');
 INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Brandy Alexander', 11016, 'https://www.thecocktaildb.com/images/media/drink/tvqxvr1483387746.jpg', 'Shake all ingredients (except nutmeg) with ice and strain contents into a cocktail glass. Sprinkle nutmeg on top and serve.', 'Cocktail Glass');
-INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Daiquiry', 11006, 'https://www.thecocktaildb.com/images/media/drink/usuuur1439906797.jpg', 'Pour all ingredients into shaker with ice cubes. Shake well. Strain in chilled cocktail glass.', 'Cocktail Glass');
+INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Daiquiri', 11006, 'https://www.thecocktaildb.com/images/media/drink/usuuur1439906797.jpg', 'Pour all ingredients into shaker with ice cubes. Shake well. Strain in chilled cocktail glass.', 'Cocktail Glass');
 -- This next query adds these drinks to the eventsMenus table, and it needs a few things. We'll need the cocktailID's from all the cocktails that were inserted into table:drinks, and we'll need the userName and events title that we stored in app.local.
 INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (1, 12762, FALSE);
 INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (1, 11016, FALSE);
@@ -36,19 +36,4 @@ INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Thomas', 1, FALSE);
 INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Kory', 1, FALSE);
 INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Brett', 1, FALSE);
 
--- The next step the user will do is VIEW THINGS!!! This should populate the public view.
-
--- View: A specific cocktailID
--- cocktailID: 11016
--- SELECT
---   drinkTitle AS drink,
---   thumbnail AS imageURL,
---   instructions,
---   glass
--- FROM
---   drinks
--- WHERE 
---   cocktailID = 11016
-
-
--- userID: 'Rubiksron', eventsID: 1
+-- Next step is viewing data. That can be found in selects.sql
