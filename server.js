@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 const superagent = require('superagent');
 const pg = require('pg');
+const client = new pg.Client(process.env.DATABASE_URL);
 
 // app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
 app.use(express.static('public'));
@@ -18,14 +19,42 @@ app.get('/guestList', guestListRender);
 app.get('/menuRender', menuPage);
 app.get('/publicView', publicPage);
 
+app.post('/event', storeUser);
 
-app.post('/event', (req, res) => {
-  res.render('pages/main/event.ejs');
-});
+function storeUser (request, response) {
+  let username = request.body.username;
+  let SQL = `
+  INSERT INTO users (userName)
+  VALUES ($1)`;
+  let values = [username];
+  console.log(request.body.username);
+  app.locals.activeUser = username;
+  console.log(app.locals.activeUser);
+  client.query(SQL, values)
+    .then( () => {
+      response.render('pages/main/event.ejs');
+    });
+}
 
-app.post('/guestList', (req, res) => {
-  res.render('pages/main/guestList.ejs');
-});
+app.post('/guestList', createEvent);
+
+function createEvent (request, response) {
+  let eventsOwner = app.locals.activeUser;
+  let eventTitle = request.body.eventTitle;
+  let eventDate = request.body.eventDate;
+  let eventLocation = request.body.eventLocation;
+  let eventDescription = request.body.eventDescription;
+  let SQL = `
+  INSERT INTO events (eventsOwner, title, date, location, description)
+  VALUES ($1, $2, $3, $4, $5)
+  `;
+  let values = [eventsOwner, eventTitle, eventDate, eventLocation, eventDescription];
+  client.query(SQL, values)
+    .then( () => {
+      console.log(values);
+      response.render('pages/main/guestList.ejs');
+    });
+}
 
 app.post('/menuRender', (req, res) => {
   res.render('pages/main/menuRender.ejs');
@@ -73,8 +102,14 @@ function Drinks(info) {
 
 app.get('*', (req, response) => response.status(404).send('This route does not exist'));
 
-function startServer(){
-  const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => console.log(`Server up on port ${PORT}`));
-}
-startServer();
+// function startServer(){
+//   const PORT = process.env.PORT || 3000;
+//   app.listen(PORT, () => console.log(`Server up on port ${PORT}`));
+// }
+// startServer();
+
+client.connect()
+  .then(() => {
+    app.listen(process.env.PORT, () => console.log(`up on ${process.env.PORT}`));
+  })
+  .catch(() => console.log('port client issue'));
