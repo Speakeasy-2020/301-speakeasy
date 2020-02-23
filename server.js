@@ -19,7 +19,6 @@ app.get('/guestList', guestListRender);
 app.get('/menuRender', menuPage);
 app.get('/publicView', publicPage);
 
-
 app.post('/event', storeUser);
 
 function storeUser (request, response) {
@@ -29,16 +28,33 @@ function storeUser (request, response) {
   VALUES ($1)`;
   let values = [username];
   console.log(request.body.username);
-  // app.locals.activeUser = request;
+  app.locals.activeUser = username;
+  console.log(app.locals.activeUser);
   client.query(SQL, values)
     .then( () => {
       response.render('pages/main/event.ejs');
     });
 }
 
-app.post('/guestList', (req, res) => {
-  res.render('pages/main/guestList.ejs');
-});
+app.post('/guestList', createEvent);
+
+function createEvent (request, response) {
+  let eventsOwner = app.locals.activeUser;
+  let eventTitle = request.body.eventTitle;
+  let eventDate = request.body.eventDate;
+  let eventLocation = request.body.eventLocation;
+  let eventDescription = request.body.eventDescription;
+  let SQL = `
+  INSERT INTO events (eventsOwner, title, date, location, description)
+  VALUES ($1, $2, $3, $4, $5)
+  `;
+  let values = [eventsOwner, eventTitle, eventDate, eventLocation, eventDescription];
+  client.query(SQL, values)
+    .then( () => {
+      console.log(values);
+      response.render('pages/main/guestList.ejs');
+    });
+}
 
 app.post('/menuRender', (req, res) => {
   res.render('pages/main/menuRender.ejs');
