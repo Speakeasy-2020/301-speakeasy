@@ -16,7 +16,7 @@
       </header>
 
       <div id="guestform">
-        <form>
+        <form action="/guestInput" method="post" class="guestSubmit">
          <label for="guestname">Name of guest:</label><br>
          <input type="text" id="guestname" name="guestname"  value="Enter name here"><br>
          <input type="submit" value="Submit">
@@ -35,7 +35,7 @@
         </div>
       </section>
      
-      <form action="/menuRender" method="post" class="guestSubmit">
+      <form action="/menuRender" method="post" class="guestToMenu">
         <button id="save">Save Guests</button>
       </form>
 

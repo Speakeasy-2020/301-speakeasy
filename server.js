@@ -60,6 +60,16 @@ app.post('/menuRender', (req, res) => {
   res.render('pages/main/menuRender.ejs');
 });
 
+app.post('/guestInput', addGuest);
+
+//still needs work to add data to db, and append stuff to dom with buttons
+function addGuest (request, response) {
+  let SQL = `
+  INSERT INTO guests (guestName, eventsID, isChecked)
+  VALUES ($1, $2, $3)
+  `;
+}
+
 function homePage(req, res) {
   res.render('pages/index.ejs');
 }
