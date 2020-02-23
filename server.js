@@ -19,7 +19,6 @@ app.get('/guestList', guestListRender);
 app.get('/menuRender', menuPage);
 app.get('/publicView', publicPage);
 
-
 app.post('/event', storeUser);
 
 function storeUser (request, response) {
@@ -64,10 +63,9 @@ function menuPage(req, res) {
   res.render('pages/main/menuRender');
 }
 
-
 function drinkRender(req, res) {
   let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=egg+nog`;
-  
+
   superagent.get(url)
     .then(data => {
       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
