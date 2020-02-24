@@ -44,6 +44,7 @@ app.post('/guestList', createEvent);
 function createEvent (request, response) {
   let eventsOwner = app.locals.activeUser;
   let eventTitle = request.body.eventTitle;
+  app.locals.activeEvent = eventTitle;
   let eventDate = new Date(request.body.eventDate);
   let leapModifier = Math.trunc((eventDate.getUTCFullYear() - 1968) / 4); // Might not need this.
   let eventTime = request.body.eventTime;
@@ -79,7 +80,16 @@ function guestListRender(req, res) {
 }
 
 function publicPage(req, res) {
-  res.render('pages/main/publicView');
+  let activeUser = 'Rubiksron';  // let activeUser = app.locals.activeUser;
+  let activeEvent = 'Class party';  // let activeEvent = app.locals.activeEvent;
+  let eventValues = [activeUser, activeEvent];
+  let eventSQL = `SELECT eventsOwner, title, to_timestamp(TRUNC(CAST(date AS bigint))) AT time zone 'utc' AS date, location, description FROM events WHERE eventsOwner = $1 AND title = $2;`;
+
+  client.query(eventSQL, eventValues)
+    .then( results => {
+      return res.render('pages/main/publicView', {results: results.rows[0]});
+    })
+    .catch(err => console.log(err));
 }
 
 function menuPage(req, res) {
