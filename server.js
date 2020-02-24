@@ -21,6 +21,9 @@ app.get('/publicView', publicPage);
 
 app.post('/event', storeUser);
 
+// Convert to unix time
+Date.prototype.unixTime = function(){return this.getTime()/1000|0};
+
 function storeUser (request, response) {
   let username = request.body.username;
   let SQL = `
@@ -41,14 +44,17 @@ app.post('/guestList', createEvent);
 function createEvent (request, response) {
   let eventsOwner = app.locals.activeUser;
   let eventTitle = request.body.eventTitle;
-  let eventDate = request.body.eventDate;
+  let eventDate = new Date(request.body.eventDate);
+  let leapModifier = Math.trunc((eventDate.getUTCFullYear() - 1968) / 4);
+  let eventTime = request.body.eventTime;
+  let eventUnixTime = new Date(eventDate.getUTCFullYear(), eventDate.getUTCMonth(), (eventDate.getUTCDay() + leapModifier), parseInt(eventTime[0] + eventTime[1]) + 17, parseInt(eventTime[3] + eventTime[4]), 0, 0).unixTime();
   let eventLocation = request.body.eventLocation;
   let eventDescription = request.body.eventDescription;
   let SQL = `
   INSERT INTO events (eventsOwner, title, date, location, description)
   VALUES ($1, $2, $3, $4, $5)
   `;
-  let values = [eventsOwner, eventTitle, eventDate, eventLocation, eventDescription];
+  let values = [eventsOwner, eventTitle, eventUnixTime, eventLocation, eventDescription];
   client.query(SQL, values)
     .then( () => {
       console.log(values);

@@ -57,7 +57,7 @@ WHERE
 -- eventsOwner = 'John Cokos'
 SELECT
   title,
-  to_timestamp(TRUNC(CAST(date AS bigint))) -- This converts the UNIX time to human readable. The format is: 2020-02-29 11:14:07-08. Note the '-08' at the end, keep in mind that's a timezone. Also, I don't really have a grasp on TRUNC or CAST. I google'd for this shit, I usually use FROM_UNIXTIME() at work.
+  to_timestamp(TRUNC(CAST(date AS bigint))) AT time zone 'utc' -- This converts the UNIX time to human readable. The format WAS: 2020-02-29 11:14:07-08. Note the '-08' at the end, keep in mind that's a timezone. Also, I don't really have a grasp on TRUNC or CAST. I google'd for this shit, I usually use FROM_UNIXTIME() at work. Note, I've put a lot of time into making the javascript time object fed to the database be a correct unix time stamp. In our query to get the formatted time from the table, we need to request UTC timestamp.
 FROM
   events
 WHERE
