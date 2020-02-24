@@ -45,9 +45,9 @@ function createEvent (request, response) {
   let eventsOwner = app.locals.activeUser;
   let eventTitle = request.body.eventTitle;
   let eventDate = new Date(request.body.eventDate);
-  let leapModifier = Math.trunc((eventDate.getUTCFullYear() - 1968) / 4);
+  let leapModifier = Math.trunc((eventDate.getUTCFullYear() - 1968) / 4); // Might not need this.
   let eventTime = request.body.eventTime;
-  let eventUnixTime = new Date(eventDate.getUTCFullYear(), eventDate.getUTCMonth(), (eventDate.getUTCDay() + leapModifier), parseInt(eventTime[0] + eventTime[1]) + 17, parseInt(eventTime[3] + eventTime[4]), 0, 0).unixTime();
+  let eventUnixTime = new Date(eventDate.getUTCFullYear(), eventDate.getUTCMonth(), eventDate.getUTCDate(), parseInt(eventTime[0] + eventTime[1]) + 16, parseInt(eventTime[3] + eventTime[4]), 0, 0).unixTime();
   let eventLocation = request.body.eventLocation;
   let eventDescription = request.body.eventDescription;
   let SQL = `
