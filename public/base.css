@@ -29,3 +29,8 @@ body {
     border: none;
     border-radius: 25px;
   }
+
+  img {
+    width: 60px;
+    height: 70px;
+  }
