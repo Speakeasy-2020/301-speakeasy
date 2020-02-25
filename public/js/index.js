@@ -8,3 +8,6 @@ function navBar() {
     x.style.display = "block";
   }
 }
+
+//guest list delete
+

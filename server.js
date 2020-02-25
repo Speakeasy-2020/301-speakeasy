@@ -24,7 +24,7 @@ app.get('/publicView', publicPage);
 app.post('/event', storeUser);
 
 // Convert to unix time
-Date.prototype.unixTime = function(){return this.getTime()/1000|0};
+Date.prototype.unixTime = function(){return this.getTime()/1000|0;};
 
 function storeUser (request, response) {
   let username = request.body.username;
@@ -61,7 +61,7 @@ function createEvent (request, response) {
   let values = [eventsOwner, eventTitle, eventUnixTime, eventLocation, eventDescription];
   client.query(SQL, values)
     .then( () => {
-      console.log(values);
+      console.log('event values', values);
       response.render('pages/main/guestList.ejs');
     });
 }
@@ -69,6 +69,25 @@ function createEvent (request, response) {
 app.post('/menuRender', (req, res) => {
   res.render('pages/main/menuRender.ejs');
 });
+
+app.post('/guestInput', addGuest);
+
+function addGuest (request, response) {
+  let guestName = request.body.guestName;
+  let eventTitle = app.locals.activeEvent;
+  let eventsOwner = app.locals.activeUser;
+  let isChecked = false;
+  let SQL = `
+  INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked)
+  VALUES ($1, $2, $3, $4)
+  `;
+  let values = [guestName, eventTitle, eventsOwner, isChecked];
+  client.query(SQL, values)
+    .then( () => {
+      console.log('guest val', values);
+    })
+    .catch(err => console.log(err));
+}
 
 function savedDatabase(req, res) {
   let SQL = `SELECT * FROM drinks`;
@@ -95,8 +114,8 @@ function guestListRender(req, res) {
 }
 
 function publicPage(req, res) {
-  let activeUser = 'Rubiksron';  // let activeUser = app.locals.activeUser;
-  let activeEvent = 'Class party';  // let activeEvent = app.locals.activeEvent;
+  let activeUser = 'Rubiksron'; // let activeUser = app.locals.activeUser;
+  let activeEvent = 'Class party'; // let activeEvent = app.locals.activeEvent;
   let eventValues = [activeUser, activeEvent];
   let eventSQL = `SELECT eventsOwner, title, to_timestamp(TRUNC(CAST(date AS bigint))) AT time zone 'utc' AS date, location, description FROM events WHERE eventsOwner = $1 AND title = $2;`;
 
