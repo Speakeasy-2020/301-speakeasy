@@ -11,7 +11,7 @@ INSERT INTO events (title, eventsOwner, date, location, description) VALUES ('Cl
 -- Next, the user will create a list of drinks to add. We'll pull three cocktails from the cocktaildb API, modeled after Kory's constructor function
 INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Grizzly Bear', 12762, 'https://www.thecocktaildb.com/images/media/drink/k6v97f1487602550.jpg', 'Served over ice. Sounds nasty, but tastes great.', 'Collins Glass');
 INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Brandy Alexander', 11016, 'https://www.thecocktaildb.com/images/media/drink/tvqxvr1483387746.jpg', 'Shake all ingredients (except nutmeg) with ice and strain contents into a cocktail glass. Sprinkle nutmeg on top and serve.', 'Cocktail Glass');
-INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Daiquiry', 11006, 'https://www.thecocktaildb.com/images/media/drink/usuuur1439906797.jpg', 'Pour all ingredients into shaker with ice cubes. Shake well. Strain in chilled cocktail glass.', 'Cocktail Glass');
+INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Daiquiri', 11006, 'https://www.thecocktaildb.com/images/media/drink/usuuur1439906797.jpg', 'Pour all ingredients into shaker with ice cubes. Shake well. Strain in chilled cocktail glass.', 'Cocktail Glass');
 -- This next query adds these drinks to the eventsMenus table, and it needs a few things. We'll need the cocktailID's from all the cocktails that were inserted into table:drinks, and we'll need the userName and events title that we stored in app.local.
 INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (1, 12762, FALSE);
 INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (1, 11016, FALSE);
@@ -36,19 +36,41 @@ INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Thomas', 1, FALSE);
 INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Kory', 1, FALSE);
 INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Brett', 1, FALSE);
 
--- The next step the user will do is VIEW THINGS!!! This should populate the public view.
-
--- View: A specific cocktailID
--- cocktailID: 11016
--- SELECT
---   drinkTitle AS drink,
---   thumbnail AS imageURL,
---   instructions,
---   glass
--- FROM
---   drinks
--- WHERE 
---   cocktailID = 11016
 
 
--- userID: 'Rubiksron', eventsID: 1
+
+-- Now, let's add a full dataset for a second user and event
+INSERT INTO users (userName) VALUES ('John Cokos');
+INSERT INTO events (title, eventsOwner, date, location, description) VALUES ('Birthday Bash for Jason', 'John Cokos', 1583003647, 'Alan Turing Room, CF, SEA, WA', 'Has anybody seen JAYSAWN?');
+INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Bumble Bee #1', 14538, 'https://www.thecocktaildb.com/images/media/drink/uwqpvv1461866378.jpg', 'A really long description', 'Shot Glass');
+INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Thai Coffee', 12782, 'https://www.thecocktaildb.com/images/media/drink/wquwxs1441247025.jpg', 'Do not want the long description', 'Highball Glass');
+INSERT INTO drinks (drinkTitle, cocktailID, thumbnail, instructions, glass) VALUES ('Gagliardo', 12758, 'https://www.thecocktaildb.com/images/media/drink/lyloe91487602877.jpg', 'Pour all ingredients into shaker with ice cubes. Shake well. Strain in chilled cocktail glass.', 'Cocktail Glass');
+INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (2, 14538, FALSE);
+INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (2, 12782, FALSE);
+INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (2, 12758, FALSE);
+INSERT INTO recipes (cocktailID, ingredient) VALUES (14538, 'Baileys irish cream');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (14538, 'Kahlua');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (14538, 'Sambuca');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (12782, 'Coffee');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (12782, 'Coriander');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (12782, 'Cardamom');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (12782, 'Sugar');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (12782, 'Whipping cream');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (12782, 'Ice');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (12758, 'Peach Vodka');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (12758, 'Lemon juice');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (12758, 'Galliano');
+INSERT INTO recipes (cocktailID, ingredient) VALUES (12758, 'Sirup of roses');
+INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Daniel', 2, FALSE);
+INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Kai H', 2, FALSE);
+INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Thomas S', 2, FALSE);
+INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Kory J', 2, FALSE);
+INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Brett P', 2, FALSE);
+
+-- What happens now if we have the same drink in two tables? Let's add the daiquiri, which we've already created a drink and recipe for, to the second event. This will let us make sure that having duplicate drinks in eventsMenus doesn't screw up anything in our query.
+INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (2, 11006, FALSE);
+-- Now, let's add it to event 2 AGAIN, and see how it handles duplicate drinks in the same event.
+INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (2, 11006, FALSE);
+-- Okay, let's see what happens when we have some guests with identical names.
+INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Daniel', 2, FALSE), ('Kai H', 2, FALSE); -- Okay, we learned something important here. If you use SELECT DISTINCT and don't select 'id', then you'll omit duplicate names.
+
