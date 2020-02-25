@@ -84,3 +84,29 @@ Working - version x.x.X
 **8:15pm:** John came in for standup. He suggested that we cut out some features. Rather than incorporate ingredients and amounts, we will simply focus on drinks as the only items. That cuts out lots of the complications for us. So we are gonna pivot to that direction.
 
 **9:15pm:** We are still working on building out domain model and schema after John’s redirection. We stood up and worked out more flow ideas. We will be getting rid of the ingredients page and will also be redoing how the Menu Builder page will work. Lots of moving parts here. Still very little code written. We are going to try and do some catchup work at home regarding domain model, data schema, and page scaffolding. That way we can really get into coding on Saturday. Kory should be here as well as he's feeling better. 
+
+### Day 5 // 2020.02.22
+
+**9:00am:** The team is here. Kory is feeling better. Getting project board set up. Trying to figure out all the tasks we need to get figured out.
+
+**10:00am:** Got files restructured. Getting routes built out. Kai researched background imagery. 
+
+**11:00am:** Had some issues getting server.js working after restructure. Kory refactored a bunch of things. Brett has data schema built out. Kory’s server fixed pushed to master. Working through merge conflicts.
+
+**11:20am:** Server issues resolved. Now we can work on the pages. Got all page CSS working. Got nav bar working on all pages. Breaking for lunch soon.
+
+**1:15pm:** Coming back from lunch. Kory will work on Menu Builder page calls - to get the search results populating drink data to page. Kai working on CSS. Brett working on data schema integration.
+
+**3:00pm:** Brett finished data structuring. Pushed to master. Dan and Thomas got button flows going. Kory and Kai working on CSS of forms. 
+
+**4:00pm:** Got user data moving from home page. Got a bunch of CSS figured out. Things are moving quickly now. Feels good. Still lots of work to do.
+
+**5:00pm:** Got event data flowing. Talking about how to dial in nuances for menu builder page. 
+
+**6:00pm:** Still trying to get guest data flowing. Hit blockers getting menu data flowing. We are all tired and beat so gonna head home to rest up and try more another day. But lots of good progress happened today. 
+
+
+## Credit
+ 
+* [Nav bar code](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_mobile_navbar)
+* [Background image](https://www.flickr.com/photos/130701539@N04/16114643463)

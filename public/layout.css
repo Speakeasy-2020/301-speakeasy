@@ -28,24 +28,6 @@ footer {
   justify-content: center;
 }
 
-#menuSection {
-  background-color:  rgba(223, 216, 195, 0.3);
-  width: 75%;
-  height: 20em;
-  display: flex;
-  justify-content: center;
-  margin: 5% auto;
-}
-
-#savedMenu {
-  background-color:  rgba(223, 216, 195, 0.3);
-  width: 75%;
-  text-align: center;
-  margin: 10% auto;
-  height: 10em;
-  border-radius: 12px;
-}
-
 #publicEventName {
   background-color:  rgba(223, 216, 195, 0.3);
   width: 75%;
@@ -93,4 +75,56 @@ footer {
   border: 15px ridge orangered;
   background-color:  rgba(223, 216, 195, 0.3);
 
+}
+
+#menuSection {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 50%;
+  height: 20em;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 5% auto;
+}
+
+.menuItems {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 250px;
+  border: 3px solid #cda24c;
+  
+}
+.menuItems > img {
+  display: flex;
+
+}
+.menuItems > h2 {
+  font-size: 20pt;
+}
+
+#savedMenu {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 50%;
+  margin: 10% auto;
+  height: 10em;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  border-radius: 12px;
+}
+
+.DBItems > h2 {
+  font-size: 20pt;
+}
+
+.DBItems {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  height: 250px;
+  border: 3px solid #cda24c;
+  
 }

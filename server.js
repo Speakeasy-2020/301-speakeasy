@@ -17,6 +17,7 @@ app.get('/', homePage);
 app.get('/event', eventRender);
 app.get('/guestList', guestListRender);
 app.get('/menuRender', savedDatabase);
+// app.get('/menuRender/search', drinkRender);
 app.get('/publicView', publicPage);
 // app.get('/savedDrink', savedDatabase);
 
@@ -29,7 +30,8 @@ function storeUser (request, response) {
   VALUES ($1)`;
   let values = [username];
   console.log(request.body.username);
-  // app.locals.activeUser = request;
+  app.locals.activeUser = username;
+  console.log(app.locals.activeUser);
   client.query(SQL, values)
     .then( () => {
       response.render('pages/main/event.ejs');
@@ -37,9 +39,25 @@ function storeUser (request, response) {
     .catch(() => errorHandler('Error 500 ! Something has gone!', request, response));
 }
 
-app.post('/guestList', (req, res) => {
-  res.render('pages/main/guestList.ejs');
-});
+app.post('/guestList', createEvent);
+
+function createEvent (request, response) {
+  let eventsOwner = app.locals.activeUser;
+  let eventTitle = request.body.eventTitle;
+  let eventDate = request.body.eventDate;
+  let eventLocation = request.body.eventLocation;
+  let eventDescription = request.body.eventDescription;
+  let SQL = `
+  INSERT INTO events (eventsOwner, title, date, location, description)
+  VALUES ($1, $2, $3, $4, $5)
+  `;
+  let values = [eventsOwner, eventTitle, eventDate, eventLocation, eventDescription];
+  client.query(SQL, values)
+    .then( () => {
+      console.log(values);
+      response.render('pages/main/guestList.ejs');
+    });
+}
 
 app.post('/menuRender', (req, res) => {
   res.render('pages/main/menuRender.ejs');
@@ -47,6 +65,7 @@ app.post('/menuRender', (req, res) => {
 
 function savedDatabase(req, res) {
   let SQL = `SELECT * FROM drinks`;
+  // let SQL2 = `SELECT * FROM recipes`;
 
   client.query(SQL)
     .then(data => {
@@ -77,15 +96,17 @@ function menuPage(req, res) {
 }
 
 
-function drinkRender(req, res) {
-  let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=egg+nog`;
-  
-  superagent.get(url)
-    .then(data => {
-      let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
-      res.render('pages/main/menuRender', {searchResults: drinkResults, });
-    });
-}
+// function drinkRender(req, res) {
+//   let drink = req.body.search;
+//   let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`;
+//   console.log(url);
+//   superagent.get(url)
+//     .then(data => {
+//       console.log(data);
+//       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
+//       res.render('pages/main/menuRender', {searchResults: drinkResults, });
+//     });
+// }
 
 function Drinks(info) {
   this.id = info.idDrink;
