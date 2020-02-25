@@ -13,10 +13,9 @@
         <div class="topnav">
           <%- include('../partials/navBar.ejs') %>
         </div>
-        
       </header>
+
       <main>
-          <h2>  </h2>
         <div id="searchForDrink">
           <h2>Look for a drink!!</h2>
           <form action="/menuRender" method="GET" >
@@ -24,8 +23,10 @@
           <button type="submit">Take A Look</button>
           </form>
         </div>
+
         <section id="menuSection">
         </section>
+
         <section id="savedMenu">
           <% databaseResults.map(obj => { %>
             <div class="DBItems">
@@ -35,15 +36,15 @@
             </div>
             <% }) %>
         </section>
+
         <form action="/publicView" method="GET">
         <button>Save</button>
         </form>
-      </main>      
+      </main>
+
       <footer>
           <!-- replace this with a partial? -->
-  
       </footer>
-    <!-- </div> -->
     <script src="/js/index.js"></script>
   </body>
 </html>

@@ -5,21 +5,17 @@
     <title>Speakeasy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%- include('../partials/header.ejs') %> 
-    
-  </head>
-  <body>
-    <!-- <div class="mobile-container"> -->
-      <header>
-        <div class="topnav">
-          <%- include('../partials/navBar.ejs') %>
-        </div>
-          
-    
-      </header>
-      <main>
-          <h2>  </h2>
-      </main>
+</head>
 
+<body>
+  <!-- <div class="mobile-container"> -->
+    <header>
+      <div class="topnav">
+        <%- include('../partials/navBar.ejs') %>
+      </div>
+    </header>
+
+    <main>
       <div id="publicEventName">
         <h1><%- results.title %></h1>
         <p><%- results.eventsowner %><br>
@@ -27,26 +23,20 @@
           <%- results.location %>
         </p>
         <p><%- results.description %></p>
-
       </div>
 
       <div id="publicGuestDisplay">
         <p>Guest List Placeholder</p>
-
       </div>
 
       <div id="publicMenuDisplay">
         <p>Menu List Placeholder</p>
-
       </div>
+    </main>
 
-
-      
-      <footer>
-          <!-- replace this with a partial? -->
-       
-      </footer>
-    <!-- </div> -->
+    <footer>
+        <!-- replace this with a partial? -->
+    </footer>
     <script src="/js/index.js"></script>
   </body>
 </html>

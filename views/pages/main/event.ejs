@@ -5,7 +5,6 @@
     <title>Speakeasy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%- include('../partials/header.ejs') %> 
-    
   </head>
   <body>
     <!-- <div class="mobile-container"> -->
@@ -13,35 +12,30 @@
         <div class="topnav">
           <%- include('../partials/navBar.ejs') %>
         </div>
-       
       </header>
-      <main id="eventInput">
-          <h1>Enter your event details </h1>
-      <div id="eventform">
-        <form action='/guestList' method="post" class="eventSubmit">
-         <label for="eventName">Enter event name below</label><br>
-         <input type="text" id="eventTitle" name="eventTitle" placeholder="Enter event name here" required><br>
-         <label for="eventDate">Enter event date below</label><br>
-         <input type="date" id="eventDate" name="eventDate" placeholder="Enter event date here" required><br>
-         <label for="eventTime">Enter event time below</label><br>
-         <input type="time" id="eventTime" name="eventTime" placeholder="12:00 pm" required><br>
-         <label for="eventLocation">Enter event location below</label><br>
-         <input type="text" id="eventLocation" name="eventLocation" placeholder="Enter event location here" required><br>
-         <label for="eventDescription">Enter event description below</label><br>
-         <input type="text" id="eventDescription" name="eventDescription" placeholder="Enter event description here" required><br>
-         <button type="submit" value="Submit">Submit your event</button>
-        </form>
-      </div>
-      <div>
-      </div>
-    </main>
 
-      
-      <footer>
-          <!-- replace this with a partial? -->
-      
-      </footer>
-    <!-- </div> -->
+      <main id="eventInput">
+        <h1>Enter your event details </h1>
+        <div id="eventform">
+          <form action='/guestList' method="post" class="eventSubmit">
+          <label for="eventName">Enter event name below</label><br>
+          <input type="text" id="eventTitle" name="eventTitle" placeholder="Enter event name here" required><br>
+          <label for="eventDate">Enter event date below</label><br>
+          <input type="date" id="eventDate" name="eventDate" placeholder="Enter event date here" required><br>
+          <label for="eventTime">Enter event time below</label><br>
+          <input type="time" id="eventTime" name="eventTime" placeholder="12:00 pm" required><br>
+          <label for="eventLocation">Enter event location below</label><br>
+          <input type="text" id="eventLocation" name="eventLocation" placeholder="Enter event location here" required><br>
+          <label for="eventDescription">Enter event description below</label><br>
+          <input type="text" id="eventDescription" name="eventDescription" placeholder="Enter event description here" required><br>
+          <button type="submit" value="Submit">Submit your event</button>
+          </form>
+        </div>
+      </main>
+
+    <footer>
+      <!-- replace this with a partial? -->
+    </footer>
     <script src="/js/index.js"></script>
   </body>
 </html>
