@@ -128,7 +128,7 @@ function eventRender(req, res) {
 function guestListRender(req, res) {
   // let user = app.locals.activeUser;
   let SQL = `
-  SELECT * from guests
+  SELECT * FROM guests
   `;
   client.query(SQL)
     .then( (results) => {
