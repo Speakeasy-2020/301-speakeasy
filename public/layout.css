@@ -72,3 +72,25 @@ footer {
   height: 10em;
   border-radius: 25px;
 }
+
+#eventInput>h1 {
+  width: 25%;
+  height: 2em;
+  padding: 5px;
+  margin: 5% auto;
+  text-align: center;
+  border: 2px solid black;
+  background-color:  rgba(223, 216, 195, 0.3);
+
+}
+
+#eventform{
+  width: 75%;
+  text-align: center;
+  margin: 5% auto;
+  height: 20em;
+  border-radius: 25px;
+  border: 15px ridge orangered;
+  background-color:  rgba(223, 216, 195, 0.3);
+
+}

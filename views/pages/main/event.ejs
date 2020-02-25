@@ -15,22 +15,25 @@
         </div>
        
       </header>
-      <main>
+      <main id="eventInput">
           <h1>Enter your event details </h1>
+          
+          <div id="eventform">
+            <form action='/guestList' method="post" class="eventSubmit">
+              <label for="eventName">Enter event name below</label><br>
+              <input type="text" id="eventTitle" name="eventTitle" placeholder="Enter event name here"><br>
+              <label for="eventDate">Enter event date below</label><br>
+              <input type="text" id="eventDate" name="eventDate" placeholder="Enter event date here"><br>
+              <label for="eventLocation">Enter event location below</label><br>
+              <input type="text" id="eventLocation" name="eventLocation" placeholder="Enter event location here"><br>
+              <label for="eventDescription">Enter event description below</label><br>
+              <input type="text" id="eventDescription" name="eventDescription" placeholder="Enter event description here"><br>
+              <button type="submit" value="Submit">Submit Your Event!</button>
+            </form>
+          </div>
+          <div>
+          </div>
       </main>
-
-      <div id="eventform">
-
-        <form action='/guestList' method="post" class="eventSubmit">
-         <label for="eventName">Enter event name below</label><br>
-         <input type="text" id="eventName" name="eventName"  value="Enter event name here"><br>
-         <label for="eventDetails">Enter event details below</label><br>
-         <input type="text" id="eventDetails" name="eventDetails" value="Enter event details here"><br>
-         <input type="submit" value="Submit">
-        </form>
-      </div>
-      <div>
-      </div>
       
       <footer>
           <!-- replace this with a partial? -->
