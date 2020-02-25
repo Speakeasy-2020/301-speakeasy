@@ -19,6 +19,9 @@
         <form action="/guestInput" method="post" class="guestSubmit">
          <label for="guestName">Name of guest:</label><br>
          <input type="text" id="guestName" name="guestName"  placeholder="Enter name here"><br>
+
+         <input id="nameListSubmit" type="submit" value="Submit">
+         
          <!-- this submit button should add guest to database and display to guestDisplay div -->
          <button id="guestFormSubmit" type="submit" value="Submit">Submit</button>
         </form>
@@ -32,6 +35,17 @@
           <h3 id="nameList">
             List of Names
             <!-- could have ejs here -->
+            <p>
+              <% guests.forEach( guest => { %>
+            </p>
+            <p>
+              <%= guest.guestname %>
+            </p>
+
+            <form method='post' action='/guests/<%= guest.id %>?_method=delete'>
+              <button type='submit'>Delete GUest</button>
+            </form>
+            <% }) %>
           </h3>
         </div>
       </section>
