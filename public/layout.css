@@ -20,12 +20,142 @@ footer {
     float: center;
   }
 
+  #form {
+    width: 40%;
+    height: 6em;
+    margin: 35px auto;
+    background-color: rgba(223, 216, 195, 0.3);
+    border-radius: 12px;
+    border: ridge 10px  #cda24c;
+    display: flex;
+    justify-content: center;
+  }
+
+  #newuser {
+    padding-top: 0.5em;
+    text-align: center;
+    width: 50%;
+    font-weight: bold;
+  }
+
+  #eventnamesubmit {
+    margin: 5px;
+    width: 40%;
+    text-align: center;
+    background-color: #cda24c;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Rye';
+    font-size: medium;
+    font-weight: bold;
+  }
+
+#guestform {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 40%;
+  height: 5em;
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  border: ridge 10px  #cda24c;
+  margin-top: 35px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0.5em;
+  text-align: center;
+  font-weight: bold;
+}
+
+#guestFormSubmit {
+  margin: 5px;
+  width: 81%;
+  text-align: center;
+  background-color: #cda24c;
+  border: none;
+  border-radius: 25px;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: medium;
+  font-weight: bold;
+}
+
 #guestDisplay {
   background-color:  rgba(223, 216, 195, 0.3);
   width: 75%;
   height: 20em;
   display: flex;
   justify-content: center;
+  margin-top: 30px;
+  border-radius: 12px;
+  border: ridge 10px  #cda24c;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0.5em;
+}
+#saveform {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  justify-content: center;
+}
+#save {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%;
+  text-align: center;
+  background-color: #cda24c;
+  border: none;
+  border-radius: 25px;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: medium;
+  font-weight: bold;
+}
+
+#eventInput>h1 {
+  width: 25%;
+  height: 2em;
+  padding-top: 0.7em;
+  margin: 5% auto;
+  text-align: center;
+  border-radius: 12px;
+  border: 10px ridge #cda24c;
+  background-color:  rgba(223, 216, 195, 0.3);
+}
+
+#eventform{
+  width: 75%;
+  text-align: center;
+  padding-top: 1.5em;
+  margin: 5% auto;
+  height: 21em;
+  border-radius: 12px;
+  border: 10px ridge #cda24c;
+  background-color:  rgba(223, 216, 195, 0.3);
+}
+
+label, input {
+  justify-content: center;
+  align-content: center;
+  margin-bottom: 15px;
+}
+
+#eventSubmitButton {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+  text-align: center;
+  background-color: #cda24c;
+  border: none;
+  border-radius: 25px;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: medium;
+  font-weight: bold;
 }
 
 #publicEventName {
@@ -55,27 +185,7 @@ footer {
   border-radius: 25px;
 }
 
-#eventInput>h1 {
-  width: 25%;
-  height: 2em;
-  padding: 5px;
-  margin: 5% auto;
-  text-align: center;
-  border: 2px solid black;
-  background-color:  rgba(223, 216, 195, 0.3);
 
-}
-
-#eventform{
-  width: 75%;
-  text-align: center;
-  margin: 5% auto;
-  height: 20em;
-  border-radius: 25px;
-  border: 15px ridge orangered;
-  background-color:  rgba(223, 216, 195, 0.3);
-
-}
 
 #menuSection {
   background-color:  rgba(223, 216, 195, 0.3);

@@ -30,11 +30,11 @@ INSERT INTO recipes (cocktailID, ingredient) VALUES (11006, 'Lime');
 INSERT INTO recipes (cocktailID, ingredient) VALUES (11006, 'Powdered sugar');
 
 -- Next, the user will build a guest list. We need to call from app.local our eventsID.
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Dan', 1, FALSE);
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Kai', 1, FALSE);
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Thomas', 1, FALSE);
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Kory', 1, FALSE);
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Brett', 1, FALSE);
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Dan', 'Class Party', 'Rubiksron', FALSE);
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Kai', 'Class Party', 'Rubiksron', FALSE);
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Thomas', 'Class Party', 'Rubiksron', FALSE);
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Kory', 'Class Party', 'Rubiksron', FALSE);
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Brett', 'Class Party', 'Rubiksron', FALSE);
 
 
 
@@ -61,16 +61,16 @@ INSERT INTO recipes (cocktailID, ingredient) VALUES (12758, 'Peach Vodka');
 INSERT INTO recipes (cocktailID, ingredient) VALUES (12758, 'Lemon juice');
 INSERT INTO recipes (cocktailID, ingredient) VALUES (12758, 'Galliano');
 INSERT INTO recipes (cocktailID, ingredient) VALUES (12758, 'Sirup of roses');
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Daniel', 2, FALSE);
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Kai H', 2, FALSE);
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Thomas S', 2, FALSE);
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Kory J', 2, FALSE);
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Brett P', 2, FALSE);
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Daniel', 'Birthday Bash for Jason', 'John Cokos', FALSE);
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Kai H', 'Birthday Bash for Jason', 'John Cokos', FALSE);
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Thomas S', 'Birthday Bash for Jason', 'John Cokos', FALSE);
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Kory J', 'Birthday Bash for Jason', 'John Cokos', FALSE);
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Brett P', 'Birthday Bash for Jason', 'John Cokos', FALSE);
 
 -- What happens now if we have the same drink in two tables? Let's add the daiquiri, which we've already created a drink and recipe for, to the second event. This will let us make sure that having duplicate drinks in eventsMenus doesn't screw up anything in our query.
 INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (2, 11006, FALSE);
 -- Now, let's add it to event 2 AGAIN, and see how it handles duplicate drinks in the same event.
 INSERT INTO eventsMenus (eventsID, cocktailID, isChecked) VALUES (2, 11006, FALSE);
 -- Okay, let's see what happens when we have some guests with identical names.
-INSERT INTO guests (guestName, eventsID, isChecked) VALUES ('Daniel', 2, FALSE), ('Kai H', 2, FALSE); -- Okay, we learned something important here. If you use SELECT DISTINCT and don't select 'id', then you'll omit duplicate names.
+INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('Daniel', 'Birthday Bash for Jason', 'John Cokos', FALSE), ('Kai H', 'Birthday Bash for Jason', 'John Cokos', FALSE); -- Okay, we learned something important here. If you use SELECT DISTINCT and don't select 'id', then you'll omit duplicate names.
 
