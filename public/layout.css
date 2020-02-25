@@ -202,7 +202,7 @@ label, input {
   display: flex;
   flex-direction: column;
   width: 30%;
-  height: 250px;
+  height: 300px;
   border: 3px solid #cda24c;
   
 }

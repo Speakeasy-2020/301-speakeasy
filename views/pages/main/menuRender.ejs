@@ -18,23 +18,45 @@
       <main>
         <div id="searchForDrink">
           <h2>Look for a drink!!</h2>
-          <form action="/menuRender" method="GET" >
+          <form action="/menuRender/search" method="POST" >
           <input type="text" name="search" placeholder="Enter A Drink">
           <button type="submit">Take A Look</button>
           </form>
         </div>
 
         <section id="menuSection">
+          <% if (typeof(searchResults) !== 'undefined') { %>
+            <% searchResults.map(obj => { %>
+              <div class="menuItems">
+                <img src="<%- obj.image  %>" alt="">
+                <h2><%= obj.name %></h2>
+                <p> <%= obj.instructions %> </p>
+                <h3>Ingredients</h3>
+                <ul>
+                  <% for(let i = 0; i < obj.ingredient.length; i++){ %>
+                    <li>
+                      <%= obj.ingredient[i] %>
+                    </li>
+                    <% } %>
+                  </ul>
+                  <form action="/drinksDatabase" method="POST">
+                    <button >Save To Menu</button>
+                  </form>
+                </div>
+                <% }) %>
+          <% } %>
         </section>
 
         <section id="savedMenu">
-          <% databaseResults.map(obj => { %>
-            <div class="DBItems">
-              <img src="<%- obj.thumbnail %>" alt="">
-              <h2><%= obj.drinktitle %></h2>
-              <p> <%= obj.instructions %> </p>
-            </div>
+          <% if (typeof(databaseResults) !== 'undefined') { %>
+            <% databaseResults.map(obj => { %>
+              <div class="DBItems">
+                <img src="<%- obj.thumbnail %>" alt="">
+                <h2><%= obj.drinktitle %></h2>
+                <p> <%= obj.instructions %> </p>
+              </div>
             <% }) %>
+          <% } %>
         </section>
 
         <form action="/publicView" method="GET">
