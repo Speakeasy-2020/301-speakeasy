@@ -58,7 +58,7 @@ function createEvent (request, response) {
   let values = [eventsOwner, eventTitle, eventUnixTime, eventLocation, eventDescription];
   client.query(SQL, values)
     .then( () => {
-      console.log(values);
+      console.log('event values', values);
       response.render('pages/main/guestList.ejs');
     });
 }
@@ -69,12 +69,21 @@ app.post('/menuRender', (req, res) => {
 
 app.post('/guestInput', addGuest);
 
-//still needs work to add data to db, and append stuff to dom with buttons
 function addGuest (request, response) {
+  let guestName = request.body.guestName;
+  let eventTitle = app.locals.activeEvent;
+  let eventsOwner = app.locals.activeUser;
+  let isChecked = false;
   let SQL = `
-  INSERT INTO guests (guestName, eventsID, isChecked)
-  VALUES ($1, $2, $3)
+  INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked)
+  VALUES ($1, $2, $3, $4)
   `;
+  let values = [guestName, eventTitle, eventsOwner, isChecked];
+  client.query(SQL, values)
+    .then( () => {
+      console.log('guest val', values);
+    })
+    .catch(err => console.log(err));
 }
 
 function homePage(req, res) {
