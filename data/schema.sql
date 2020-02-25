@@ -23,8 +23,7 @@ CREATE TABLE events (
   title VARCHAR(64),
   date VARCHAR(64),
   location VARCHAR(128),
-  description VARCHAR(255),
-  cocktailList INTEGER
+  description VARCHAR(255)
 );
 
 CREATE TABLE drinks (

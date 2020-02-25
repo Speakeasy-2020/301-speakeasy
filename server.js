@@ -23,6 +23,9 @@ app.get('/publicView', publicPage);
 
 app.post('/event', storeUser);
 
+// Convert to unix time
+Date.prototype.unixTime = function(){return this.getTime()/1000|0};
+
 function storeUser (request, response) {
   let username = request.body.username;
   let SQL = `
@@ -44,14 +47,18 @@ app.post('/guestList', createEvent);
 function createEvent (request, response) {
   let eventsOwner = app.locals.activeUser;
   let eventTitle = request.body.eventTitle;
-  let eventDate = request.body.eventDate;
+  app.locals.activeEvent = eventTitle;
+  let eventDate = new Date(request.body.eventDate);
+  let leapModifier = Math.trunc((eventDate.getUTCFullYear() - 1968) / 4); // Might not need this.
+  let eventTime = request.body.eventTime;
+  let eventUnixTime = new Date(eventDate.getUTCFullYear(), eventDate.getUTCMonth(), eventDate.getUTCDate(), parseInt(eventTime[0] + eventTime[1]) + 16, parseInt(eventTime[3] + eventTime[4]), 0, 0).unixTime();
   let eventLocation = request.body.eventLocation;
   let eventDescription = request.body.eventDescription;
   let SQL = `
   INSERT INTO events (eventsOwner, title, date, location, description)
   VALUES ($1, $2, $3, $4, $5)
   `;
-  let values = [eventsOwner, eventTitle, eventDate, eventLocation, eventDescription];
+  let values = [eventsOwner, eventTitle, eventUnixTime, eventLocation, eventDescription];
   client.query(SQL, values)
     .then( () => {
       console.log(values);
@@ -88,7 +95,16 @@ function guestListRender(req, res) {
 }
 
 function publicPage(req, res) {
-  res.render('pages/main/publicView');
+  let activeUser = 'Rubiksron';  // let activeUser = app.locals.activeUser;
+  let activeEvent = 'Class party';  // let activeEvent = app.locals.activeEvent;
+  let eventValues = [activeUser, activeEvent];
+  let eventSQL = `SELECT eventsOwner, title, to_timestamp(TRUNC(CAST(date AS bigint))) AT time zone 'utc' AS date, location, description FROM events WHERE eventsOwner = $1 AND title = $2;`;
+
+  client.query(eventSQL, eventValues)
+    .then( results => {
+      return res.render('pages/main/publicView', {results: results.rows[0]});
+    })
+    .catch(err => console.log(err));
 }
 
 function menuPage(req, res) {
