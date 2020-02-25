@@ -16,15 +16,15 @@ app.set('view engine', 'ejs');
 app.get('/', homePage);
 app.get('/event', eventRender);
 app.get('/guestList', guestListRender);
-app.get('/menuRender', savedDatabase);
-// app.get('/menuRender/search', drinkRender);
+app.get('/menuRender', savedDrinksRender);
+app.post('/menuRender/search', drinkRender);
 app.get('/publicView', publicPage);
-// app.get('/savedDrink', savedDatabase);
 
 app.post('/event', storeUser);
 
+
 // Convert to unix time
-Date.prototype.unixTime = function(){return this.getTime()/1000|0;};
+Date.prototype.unixTime = function(){return this.getTime() / 1000 | 0;};
 
 function storeUser (request, response) {
   let username = request.body.username;
@@ -89,13 +89,12 @@ function addGuest (request, response) {
     .catch(err => console.log(err));
 }
 
-function savedDatabase(req, res) {
+function savedDrinksRender(req, res) {
   let SQL = `SELECT * FROM drinks`;
   // let SQL2 = `SELECT * FROM recipes`;
 
   client.query(SQL)
     .then(data => {
-      console.log(data);
       res.render('pages/main/menuRender.ejs', { databaseResults: data.rows, });
     })
     .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
@@ -126,22 +125,20 @@ function publicPage(req, res) {
     .catch(err => console.log(err));
 }
 
-function menuPage(req, res) {
-  res.render('pages/main/menuRender');
+
+function drinkRender(req, res) {
+  let drink = req.body.search;
+  console.log(drink);
+  let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`;
+  console.log(url);
+  superagent.get(url)
+    .then(data => {
+      // console.log(data);
+      let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
+      console.log(drinkResults);
+      res.render('pages/main/menuRender', {searchResults: drinkResults });
+    });
 }
-
-
-// function drinkRender(req, res) {
-//   let drink = req.body.search;
-//   let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`;
-//   console.log(url);
-//   superagent.get(url)
-//     .then(data => {
-//       console.log(data);
-//       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
-//       res.render('pages/main/menuRender', {searchResults: drinkResults, });
-//     });
-// }
 
 function Drinks(info) {
   this.id = info.idDrink;
