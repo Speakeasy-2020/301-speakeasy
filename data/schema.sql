@@ -13,7 +13,8 @@ CREATE TABLE users (
 CREATE TABLE guests (
   id SERIAL PRIMARY KEY,
   guestName VARCHAR(32),
-  eventsID INTEGER,
+  eventTitle VARCHAR(64),
+  eventOwner VARCHAR(32),
   isChecked BOOLEAN
 );
 

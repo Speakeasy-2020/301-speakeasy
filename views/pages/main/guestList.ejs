@@ -16,9 +16,9 @@
       </header>
 
       <div id="guestform">
-        <form>
-         <label for="guestname">Name of guest:</label><br>
-         <input type="text" id="guestname" name="guestname"  value="Enter name here"><br>
+        <form action="/guestInput" method="post" class="guestSubmit">
+         <label for="guestName">Name of guest:</label><br>
+         <input type="text" id="guestName" name="guestName"  placeholder="Enter name here"><br>
          <input type="submit" value="Submit">
          <!-- this submit button should add guest to database and display to guestDisplay div -->
         </form>
@@ -29,13 +29,14 @@
           <h2>
             Guest Names
           </h2>
-          <p>
+          <h3 id="nameList">
             List of Names
-          </p>
+            <!-- could have ejs here -->
+          </h3>
         </div>
       </section>
      
-      <form action="/menuRender" method="post" class="guestSubmit">
+      <form action="/menuRender" method="post" class="guestToMenu">
         <button id="save">Save Guests</button>
       </form>
 
@@ -43,6 +44,7 @@
           <!-- replace this with a partial? -->
       </footer>
     <!-- </div> -->
+    <script   src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="   crossorigin="anonymous"></script>
     <script src="/js/index.js"></script>
   </body>
 </html>
