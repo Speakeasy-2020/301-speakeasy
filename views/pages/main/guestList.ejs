@@ -19,8 +19,8 @@
         <form action="/guestInput" method="post" class="guestSubmit">
          <label for="guestName">Name of guest:</label><br>
          <input type="text" id="guestName" name="guestName"  placeholder="Enter name here"><br>
-         <input type="submit" value="Submit">
          <!-- this submit button should add guest to database and display to guestDisplay div -->
+         <button id="guestFormSubmit" type="submit" value="Submit">Submit</button>
         </form>
       </div>
 
@@ -36,7 +36,7 @@
         </div>
       </section>
      
-      <form action="/menuRender" method="post" class="guestToMenu">
+      <form id="saveform" action="/menuRender" method="post" class="guestToMenu">
         <button id="save">Save Guests</button>
       </form>
 
