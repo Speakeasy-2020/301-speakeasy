@@ -15,7 +15,7 @@
       </header>
 
       <main id="eventInput">
-        <h1>Enter your event details </h1>
+          <h1>Enter your event details </h1>
         <div id="eventform">
           <form action='/guestList' method="post" class="eventSubmit">
           <label for="eventName">Enter event name below</label><br>
@@ -27,8 +27,8 @@
           <label for="eventLocation">Enter event location below</label><br>
           <input type="text" id="eventLocation" name="eventLocation" placeholder="Enter event location here" required><br>
           <label for="eventDescription">Enter event description below</label><br>
-          <input type="text" id="eventDescription" name="eventDescription" placeholder="Enter event description here" required><br>
-          <button type="submit" value="Submit">Submit your event</button>
+          <textarea cols="50" rows="5" width="200px" height="50px" id="eventDescription" name="eventDescription" placeholder="Enter event description here" required></textarea><br>
+          <button id="eventSubmitButton" type="submit" value="Submit">Submit your event</button>
           </form>
         </div>
       </main>
@@ -39,4 +39,3 @@
     <script src="/js/index.js"></script>
   </body>
 </html>
-
