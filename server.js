@@ -6,10 +6,12 @@ const app = express();
 const superagent = require('superagent');
 const pg = require('pg');
 const client = new pg.Client(process.env.DATABASE_URL);
+const methodOverride = require('method-override');
 
 // app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true, }));
+app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
 // Server endpoints
@@ -22,6 +24,7 @@ app.get('/publicView', publicPage);
 // app.get('/savedDrink', savedDatabase);
 
 app.post('/event', storeUser);
+app.delete('/guests/:id', deleteGuest);
 
 // Convert to unix time
 Date.prototype.unixTime = function(){return this.getTime()/1000|0;};
@@ -56,13 +59,14 @@ function createEvent (request, response) {
   let eventDescription = request.body.eventDescription;
   let SQL = `
   INSERT INTO events (eventsOwner, title, date, location, description)
-  VALUES ($1, $2, $3, $4, $5)
+  VALUES ($1, $2, $3, $4, $5) RETURNING *
   `;
   let values = [eventsOwner, eventTitle, eventUnixTime, eventLocation, eventDescription];
   client.query(SQL, values)
-    .then( () => {
-      console.log('event values', values);
-      response.render('pages/main/guestList.ejs');
+    .then( (results) => {
+      console.log('event values', results.rows);
+      // response.render('pages/main/guestList.ejs');
+      guestListRender(request, response);
     });
 }
 
@@ -79,12 +83,24 @@ function addGuest (request, response) {
   let isChecked = false;
   let SQL = `
   INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked)
-  VALUES ($1, $2, $3, $4)
+  VALUES ($1, $2, $3, $4) RETURNING *
   `;
   let values = [guestName, eventTitle, eventsOwner, isChecked];
   client.query(SQL, values)
-    .then( () => {
-      console.log('guest val', values);
+    .then( (results) => {
+      guestListRender(request, response);
+      // console.log('guest val', results.rows);
+      // response.redirect('/guestList');
+    })
+    .catch(err => console.log(err));
+}
+
+function deleteGuest (request, response) {
+  let SQL = 'DELETE FROM guests where id=$1';
+  let values = [request.params.id];
+  return client.query(SQL, values)
+    .then(() => {
+      guestListRender(request, response);
     })
     .catch(err => console.log(err));
 }
@@ -110,7 +126,15 @@ function eventRender(req, res) {
 }
 
 function guestListRender(req, res) {
-  res.render('pages/main/guestList');
+  // let user = app.locals.activeUser;
+  let SQL = `
+  SELECT * from guests
+  `;
+  client.query(SQL)
+    .then( (results) => {
+      console.log(results.rows);
+      res.render('pages/main/guestList', { guests: results.rows});
+    });
 }
 
 function publicPage(req, res) {
