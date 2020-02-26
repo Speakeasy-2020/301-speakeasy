@@ -64,6 +64,8 @@ function createEvent (request, response) {
   VALUES ($1, $2, $3, $4, $5) RETURNING *
   `;
   let values = [eventsOwner, eventTitle, eventUnixTime, eventLocation, eventDescription];
+  let SQLguest = `INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('${app.locals.activeUser}', '${app.locals.activeEvent}', '${app.locals.activeUser}', TRUE);`;
+  client.query(SQLguest);
   client.query(SQL, values)
     .then( (results) => {
       console.log('event values', results.rows);
@@ -154,13 +156,11 @@ function drinksTableDB (req, res) {
 }
 
 function guestListRender(req, res) {
-  // let user = app.locals.activeUser;
   let SQL = `
-  SELECT * from guests
+  SELECT * FROM guests WHERE eventOwner = '${app.locals.activeUser}' AND eventTitle = '${app.locals.activeUser}'
   `;
   client.query(SQL)
     .then( (results) => {
-      console.log(results.rows);
       res.render('pages/main/guestList', { guests: results.rows});
     });
 }
@@ -177,7 +177,6 @@ function publicPage(req, res) {
     })
     .catch(err => console.log(err));
 }
-
 
 function drinkRender(req, res) {
   let drink = req.body.search;
@@ -207,6 +206,7 @@ app.get('*', (req, response) => response.status(404).send('This route does not e
 function errorHandler(error, req, response) {
   response.status(500).send(error);
 }
+// Still need errorPage.ejs
 
 // function startServer(){
 //   const PORT = process.env.PORT || 3000;
@@ -219,3 +219,4 @@ client.connect()
     app.listen(process.env.PORT, () => console.log(`up on ${process.env.PORT}`));
   })
   .catch(() => console.log('port client issue'));
+
