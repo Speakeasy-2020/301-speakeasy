@@ -50,71 +50,6 @@ footer {
     font-weight: bold;
   }
 
-#guestform {
-  background-color:  rgba(223, 216, 195, 0.3);
-  width: 40%;
-  height: 5em;
-  display: flex;
-  justify-content: center;
-  border-radius: 12px;
-  border: ridge 10px  #cda24c;
-  margin-top: 35px;
-  margin-bottom: 5px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 0.5em;
-  text-align: center;
-  font-weight: bold;
-}
-
-#guestFormSubmit {
-  margin: 5px;
-  width: 81%;
-  text-align: center;
-  background-color: #cda24c;
-  border: none;
-  border-radius: 25px;
-  justify-content: center;
-  font-family: 'Rye';
-  font-size: medium;
-  font-weight: bold;
-}
-
-#guestDisplay {
-  background-color:  rgba(223, 216, 195, 0.3);
-  width: 75%;
-  height: 20em;
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  border-radius: 12px;
-  border: ridge 10px  #cda24c;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 0.5em;
-}
-#saveform {
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  justify-content: center;
-}
-#save {
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 15%;
-  text-align: center;
-  background-color: #cda24c;
-  border: none;
-  border-radius: 25px;
-  justify-content: center;
-  font-family: 'Rye';
-  font-size: medium;
-  font-weight: bold;
-}
-
 #eventInput>h1 {
   width: 25%;
   height: 2em;
@@ -148,6 +83,103 @@ label, input {
   margin-left: auto;
   margin-right: auto;
   width: 20%;
+  text-align: center;
+  background-color: #cda24c;
+  border: none;
+  border-radius: 25px;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: medium;
+  font-weight: bold;
+}
+
+#guestform {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 40%;
+  height: 5em;
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  border: ridge 10px  #cda24c;
+  margin-top: 35px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0.5em;
+  text-align: center;
+  font-weight: bold;
+}
+
+#nameListSubmit {
+  margin: 5px;
+  width: 81%;
+  text-align: center;
+  background-color: #cda24c;
+  border: none;
+  border-radius: 25px;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: medium;
+  font-weight: bold;
+}
+
+h3 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#guestDisplay {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 38%;
+  height: 25em;
+  margin-top: 30px;
+  border-radius: 12px;
+  border: ridge 10px  #cda24c;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0.5em;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  overflow: scroll;
+}
+
+p {
+  margin-bottom: 5px;
+}
+
+#deleteGuest {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  text-align: center;
+  background-color: #cda24c;
+  border: none;
+  border-radius: 25px;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: small;
+  margin-bottom: 5px;
+}
+
+#saveform {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 35px;
+  text-align: center;
+  justify-content: center;
+}
+
+#save {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%;
   text-align: center;
   background-color: #cda24c;
   border: none;
