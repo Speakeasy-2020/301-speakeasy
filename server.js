@@ -25,6 +25,7 @@ app.post('/drinksDatabase', drinksTableDB);
 
 app.post('/event', storeUser);
 app.delete('/guests/:id', deleteGuest);
+app.delete('/drink/:id', deleteDrink);
 
 
 // Convert to unix time
@@ -117,6 +118,17 @@ function savedDrinksRender(req, res) {
     .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
 }
 
+function deleteDrink(req, res) {
+  let SQL = `DELETE FROM drinks WHERE id = $1`;
+  let values = [req.params.id];
+
+  return client.query(SQL, values)
+    .then(() => {
+      savedDrinksRender(req, res);
+    })
+    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
+}
+
 function homePage(req, res) {
   res.render('pages/index.ejs');
 }
@@ -178,7 +190,8 @@ function drinkRender(req, res) {
       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
       console.log(drinkResults);
       res.render('pages/main/menuRender', {searchResults: drinkResults });
-    });
+    })
+    .catch(err => console.log(err));
 }
 
 function Drinks(info) {
