@@ -23,33 +23,6 @@
           <button type="submit">Take A Look</button>
           </form>
         </div>
-        <section id="menuSection">
-          <% if (typeof(searchResults) !== 'undefined') { %>
-            <% searchResults.map(obj => { %>
-              <div class="menuItems">
-                <img src="<%- obj.image  %>" alt="">
-                <h2><%= obj.name %></h2>
-                <p> <%= obj.instructions %> </p>
-                <h3>Ingredients</h3>
-                <ul>
-                  <% for(let i = 0; i < obj.ingredient.length; i++){ %>
-                    <li>
-                      <%= obj.ingredient[i] %>
-                    </li>
-                    <% } %>
-                  </ul>
-                  <form action="/drinksDatabase" method="POST">
-                    <input type="hidden" name="drink_id" value="<%- obj.id %>">
-                    <input type="hidden" name="drink_drinkTitle" value="<%- obj.name %>">
-                    <input type="hidden" name="drink_image" value="<%- obj.image %>">
-                    <input type="hidden" name="drink_instructions" value="<%- obj.instructions%>">
-                    <input type="hidden" name="drink_glass" value="<%-obj.glass%>">
-                    <button >Save To Menu</button>
-                  </form>
-                </div>
-                <% }) %>
-          <% } %>
-        </section>
         <section id="savedMenu">
           <% if (typeof(databaseResults) !== 'undefined') { %>
             <% databaseResults.map(obj => { %>

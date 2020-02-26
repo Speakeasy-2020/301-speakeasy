@@ -188,8 +188,7 @@ function drinkRender(req, res) {
     .then(data => {
       // console.log(data);
       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
-      console.log(drinkResults);
-      res.render('pages/main/menuRender', {searchResults: drinkResults });
+      res.render('pages/main/drinkSearch', {searchResults: drinkResults });
     })
     .catch(err => console.log(err));
 }
