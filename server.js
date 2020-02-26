@@ -106,11 +106,23 @@ function deleteGuest (request, response) {
 }
 
 function savedDrinksRender(req, res) {
-  let SQL = `SELECT * FROM drinks`;
+  let SQL = `SELECT
+  a.drinkTitle AS a_drink,
+  a.thumbnail AS a_img,
+  a.instructions AS a_instructions
+FROM
+  drinks a
+LEFT JOIN eventsMenus b ON a.cocktailID = b.cocktailID
+LEFT JOIN events c ON b.eventsID = c.title
+WHERE
+  c.eventsOwner = '${app.locals.activeUser}'
+  AND c.title = '${app.locals.activeEvent}'
+;`;
   // let SQL2 = `SELECT * FROM recipes`;
 
   client.query(SQL)
     .then(data => {
+      console.log(data.rows);
       res.render('pages/main/menuRender.ejs', { databaseResults: data.rows, });
     })
     .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
@@ -143,10 +155,18 @@ function drinksTableDB (req, res) {
   let instructions = req.body.drink_instructions;
 
   let SQL = `INSERT INTO drinks ( cocktailID, drinkTitle, thumbnail, instructions, glass) VALUES ($1, $2, $3, $4, $5);`;
+  let SQL2 = `INSERT INTO eventsMenus ( cocktailID, eventsID) VALUES ($1, $2);`;
   let values = [drinkID, name, image, instructions, glass];
+  let values2 = [drinkID, app.locals.activeEvent];
   return client.query(SQL, values)
     .then(() => {
       savedDrinksRender(req, res);
+    })
+    .then(() => {
+      return client.query(SQL2, values2)
+        .then((data) => {
+          console.log(data.rows);
+        });
     })
     .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
 }
