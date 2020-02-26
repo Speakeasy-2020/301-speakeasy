@@ -21,6 +21,7 @@ app.get('/guestList', guestListRender);
 app.get('/menuRender', savedDrinksRender);
 app.post('/menuRender/search', drinkRender);
 app.get('/publicView', publicPage);
+app.post('/drinksDatabase', drinksTableDB);
 
 app.post('/event', storeUser);
 app.delete('/guests/:id', deleteGuest);
@@ -122,6 +123,22 @@ function homePage(req, res) {
 
 function eventRender(req, res) {
   res.render('pages/main/event.ejs');
+}
+
+function drinksTableDB (req, res) {
+  let drinkID = req.body.drink_id;
+  let name = req.body.drink_drinkTitle;
+  let image = req.body.drink_image;
+  let glass = req.body.drink_glass;
+  let instructions = req.body.drink_instructions;
+
+  let SQL = `INSERT INTO drinks ( cocktailID, drinkTitle, thumbnail, instructions, glass) VALUES ($1, $2, $3, $4, $5);`;
+  let values = [drinkID, name, image, instructions, glass];
+  return client.query(SQL, values)
+    .then(() => {
+      savedDrinksRender(req, res);
+    })
+    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
 }
 
 function guestListRender(req, res) {

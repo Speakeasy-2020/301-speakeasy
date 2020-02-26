@@ -39,6 +39,11 @@
                     <% } %>
                   </ul>
                   <form action="/drinksDatabase" method="POST">
+                    <input type="hidden" name="drink_id" value="<%- obj.id %>">
+                    <input type="hidden" name="drink_drinkTitle" value="<%- obj.name %>">
+                    <input type="hidden" name="drink_image" value="<%- obj.image %>">
+                    <input type="hidden" name="drink_instructions" value="<%- obj.instructions%>">
+                    <input type="hidden" name="drink_glass" value="<%-obj.glass%>">
                     <button >Save To Menu</button>
                   </form>
                 </div>
