@@ -174,7 +174,6 @@ function publicPage(req, res) {
     .catch(err => console.log(err));
 }
 
-
 function drinkRender(req, res) {
   let drink = req.body.search;
   console.log(drink);
@@ -203,6 +202,7 @@ app.get('*', (req, response) => response.status(404).send('This route does not e
 function errorHandler(error, req, response) {
   response.status(500).send(error);
 }
+// Still need errorPage.ejs
 
 // function startServer(){
 //   const PORT = process.env.PORT || 3000;
@@ -215,3 +215,4 @@ client.connect()
     app.listen(process.env.PORT, () => console.log(`up on ${process.env.PORT}`));
   })
   .catch(() => console.log('port client issue'));
+
