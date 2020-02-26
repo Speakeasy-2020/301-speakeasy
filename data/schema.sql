@@ -34,8 +34,6 @@ CREATE TABLE drinks (
   thumbnail TEXT,
   instructions TEXT,
   glass VARCHAR(32),
-  ingredient VARCHAR(32)
-
 );
 
 CREATE TABLE recipes (
