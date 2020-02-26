@@ -74,10 +74,6 @@ function createEvent (request, response) {
     });
 }
 
-app.post('/menuRender', (req, res) => {
-  res.render('pages/main/menuRender.ejs');
-});
-
 app.post('/guestInput', addGuest);
 
 function addGuest (request, response) {
@@ -157,7 +153,7 @@ function drinksTableDB (req, res) {
 
 function guestListRender(req, res) {
   let SQL = `
-  SELECT * FROM guests WHERE eventOwner = '${app.locals.activeUser}' AND eventTitle = '${app.locals.activeUser}'
+  SELECT * FROM guests WHERE eventOwner = '${app.locals.activeUser}' AND eventTitle = '${app.locals.activeEvent}'
   `;
   client.query(SQL)
     .then( (results) => {
