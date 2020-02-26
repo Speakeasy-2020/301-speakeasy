@@ -1,63 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Speakeasy</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%- include('../partials/header.ejs') %> 
-    
-  </head>
-  <body>
-    <!-- <div class="mobile-container"> -->
-      <header>
-        <div class="topnav">
-          <%- include('../partials/navBar.ejs') %>
-        </div>
-      </header>
+  <meta charset="UTF-8">
+  <title>Speakeasy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%- include('../partials/header.ejs') %> 
+</head>
 
-      <div id="guestform">
-        <form action="/guestInput" method="post" class="guestSubmit">
-         <label for="guestName">Name of guest:</label><br>
-         <input type="text" id="guestName" name="guestName"  placeholder="Enter name here"><br>
-
-         <input id="nameListSubmit" type="submit" value="Submit">
-         
-         <!-- this submit button should add guest to database and display to guestDisplay div -->
-         <button id="guestFormSubmit" type="submit" value="Submit">Submit</button>
-        </form>
+<body>
+  <!-- <div class="mobile-container"> -->
+    <header>
+      <div class="topnav">
+        <%- include('../partials/navBar.ejs') %>
       </div>
+    </header>
 
-      <section id="guestDisplay">
-        <div class="guestDiv">
-          <h2>
-            Guest Names
-          </h2>
-          <h3 id="nameList">
-            List of Names
-            <!-- could have ejs here -->
-            <p>
-              <% guests.forEach( guest => { %>
-            </p>
-            <p>
-              <%= guest.guestname %>
-            </p>
+    <div id="guestform">
+      <form action="/guestInput" method="post" class="guestSubmit">
+        <label for="guestName">Name of guest:</label><br>
+        <input type="text" id="guestName" name="guestName"  placeholder="Enter name here"><br>
 
-            <form method='post' action='/guests/<%= guest.id %>?_method=delete'>
-              <button type='submit'>Delete GUest</button>
-            </form>
-            <% }) %>
-          </h3>
-        </div>
-      </section>
-     
-      <form id="saveform" action="/menuRender" method="post" class="guestToMenu">
-        <button id="save">Save Guests</button>
+        <input id="nameListSubmit" type="submit" value="Submit">
+        
+        <!-- this submit button should add guest to database and display to guestDisplay div -->
+        <button id="guestFormSubmit" type="submit" value="Submit">Submit</button>
       </form>
+    </div>
 
-      <footer>
-          <!-- replace this with a partial? -->
-      </footer>
-    <!-- </div> -->
+    <section id="guestDisplay">
+      <div class="guestDiv">
+        <h2>
+          Guest Names
+        </h2>
+        <h3 id="nameList">
+          List of Names
+          <!-- could have ejs here -->
+          <p>
+            <% guests.forEach( guest => { %>
+          </p>
+          <p>
+            <%= guest.guestname %>
+          </p>
+
+          <form method='post' action='/guests/<%= guest.id %>?_method=delete'>
+            <button type='submit'>Delete GUest</button>
+          </form>
+          <% }) %>
+        </h3>
+      </div>
+    </section>
+    <form id="saveform" action="/menuRender" method="post" class="guestToMenu">
+      <button id="save">Save Guests</button>
+    </form>
+  <!-- </div>    for mobile container  -->  
+  <footer>
+    <!-- replace this with a partial? -->
+  </footer>
     <script   src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="   crossorigin="anonymous"></script>
     <script src="/js/index.js"></script>
   </body>

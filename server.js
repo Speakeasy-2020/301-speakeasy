@@ -72,10 +72,6 @@ function createEvent (request, response) {
     });
 }
 
-app.post('/menuRender', (req, res) => {
-  res.render('pages/main/menuRender.ejs');
-});
-
 app.post('/guestInput', addGuest);
 
 function addGuest (request, response) {
