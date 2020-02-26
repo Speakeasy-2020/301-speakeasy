@@ -6,21 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%- include('../partials/header.ejs') %> 
     
-</head>
-<body>
-  <!-- <div class="mobile-container"> -->
-    <header>
-      <div class="topnav">
-        <%- include('../partials/navBar.ejs') %>
-      </div>
-    </header>
-
-    <main>
-      <div id="searchForDrink">
-        <h2>Look for a drink!!</h2>
-        <form action="/menuRender/search" method="POST" >
-        <input type="text" name="search" placeholder="Enter A Drink">
-        <button type="submit">Take A Look</button>
+  </head>
+  <body>
+    <!-- <div class="mobile-container"> -->
+      <header>
+        <div class="topnav">
+          <%- include('../partials/navBar.ejs') %>
+        </div>
+        
+      </header>
+      <main>
+        <div id="searchForDrink">
+          <h2>Look for a drink!!</h2>
+          <form action="/menuRender/search" method="POST" >
+          <input type="text" name="search" placeholder="Enter A Drink">
+          <button type="submit">Take A Look</button>
+          </form>
+        </div>
+        <section id="savedMenu">
+          <% if (typeof(databaseResults) !== 'undefined') { %>
+            <% databaseResults.map(obj => { %>
+              <div class="DBItems">
+                <img src="<%- obj.thumbnail %>" alt="">
+                <h2><%= obj.drinktitle %></h2>
+                <p> <%= obj.instructions %> </p>
+                <form action="/drink/<%= obj.id %>?_method=delete" method="POST">
+                  <button type="submit">Remove</button>
+                </form>
+              </div>
+            <% }) %>
+          <% } %>
+        </section>
+        <form action="/publicView" method="GET">
+        <button>Save</button>
         </form>
       </div>
 

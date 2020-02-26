@@ -21,9 +21,11 @@ app.get('/guestList', guestListRender);
 app.get('/menuRender', savedDrinksRender);
 app.post('/menuRender/search', drinkRender);
 app.get('/publicView', publicPage);
+app.post('/drinksDatabase', drinksTableDB);
 
 app.post('/event', storeUser);
 app.delete('/guests/:id', deleteGuest);
+app.delete('/drink/:id', deleteDrink);
 
 
 // Convert to unix time
@@ -118,12 +120,39 @@ function savedDrinksRender(req, res) {
     .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
 }
 
+function deleteDrink(req, res) {
+  let SQL = `DELETE FROM drinks WHERE id = $1`;
+  let values = [req.params.id];
+
+  return client.query(SQL, values)
+    .then(() => {
+      savedDrinksRender(req, res);
+    })
+    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
+}
+
 function homePage(req, res) {
   res.render('pages/index.ejs');
 }
 
 function eventRender(req, res) {
   res.render('pages/main/event.ejs');
+}
+
+function drinksTableDB (req, res) {
+  let drinkID = req.body.drink_id;
+  let name = req.body.drink_drinkTitle;
+  let image = req.body.drink_image;
+  let glass = req.body.drink_glass;
+  let instructions = req.body.drink_instructions;
+
+  let SQL = `INSERT INTO drinks ( cocktailID, drinkTitle, thumbnail, instructions, glass) VALUES ($1, $2, $3, $4, $5);`;
+  let values = [drinkID, name, image, instructions, glass];
+  return client.query(SQL, values)
+    .then(() => {
+      savedDrinksRender(req, res);
+    })
+    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
 }
 
 function guestListRender(req, res) {
@@ -158,9 +187,9 @@ function drinkRender(req, res) {
     .then(data => {
       // console.log(data);
       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
-      console.log(drinkResults);
-      res.render('pages/main/menuRender', {searchResults: drinkResults });
-    });
+      res.render('pages/main/drinkSearch', {searchResults: drinkResults });
+    })
+    .catch(err => console.log(err));
 }
 
 function Drinks(info) {

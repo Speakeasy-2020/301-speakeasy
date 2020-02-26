@@ -33,7 +33,7 @@ CREATE TABLE drinks (
   cocktailID INTEGER,
   thumbnail TEXT,
   instructions TEXT,
-  glass VARCHAR(32)
+  glass VARCHAR(32),
 );
 
 CREATE TABLE recipes (
