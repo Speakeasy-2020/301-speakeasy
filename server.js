@@ -62,6 +62,8 @@ function createEvent (request, response) {
   VALUES ($1, $2, $3, $4, $5) RETURNING *
   `;
   let values = [eventsOwner, eventTitle, eventUnixTime, eventLocation, eventDescription];
+  let SQLguest = `INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('${app.locals.activeUser}', '${app.locals.activeEvent}', '${app.locals.activeUser}', TRUE);`;
+  client.query(SQLguest);
   client.query(SQL, values)
     .then( (results) => {
       console.log('event values', results.rows);
@@ -126,13 +128,11 @@ function eventRender(req, res) {
 }
 
 function guestListRender(req, res) {
-  // let user = app.locals.activeUser;
   let SQL = `
-  SELECT * FROM guests
+  SELECT * FROM guests WHERE eventOwner = '${app.locals.activeUser}' AND eventTitle = '${app.locals.activeUser}'
   `;
   client.query(SQL)
     .then( (results) => {
-      console.log(results.rows);
       res.render('pages/main/guestList', { guests: results.rows});
     });
 }
