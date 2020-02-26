@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Speakeasy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include('../partials/header.ejs') %> 
+    
+  </head>
+  <body>
+    <!-- <div class="mobile-container"> -->
+      <header>
+        <div class="topnav">
+          <%- include('../partials/navBar.ejs') %>
+        </div>
+        
+      </header>
+      <main>
+        <div id="searchForDrink">
+          <h2>Look for a drink!!</h2>
+          <form action="/menuRender/search" method="POST" >
+          <input type="text" name="search" placeholder="Enter A Drink">
+          <button type="submit">Take A Look</button>
+          </form>
+        </div>
+        <section id="menuSection">
+          <% if (typeof(searchResults) !== 'undefined') { %>
+            <% searchResults.map(obj => { %>
+              <div class="menuItems">
+                <img src="<%- obj.image  %>" alt="">
+                <h2><%= obj.name %></h2>
+                <p> <%= obj.instructions %> </p>
+                <h3>Ingredients</h3>
+                <ul>
+                  <% for(let i = 0; i < obj.ingredient.length; i++){ %>
+                    <li>
+                      <%= obj.ingredient[i] %>
+                    </li>
+                    <% } %>
+                  </ul>
+                  <form action="/drinksDatabase" method="POST">
+                    <input type="hidden" name="drink_id" value="<%- obj.id %>">
+                    <input type="hidden" name="drink_drinkTitle" value="<%- obj.name %>">
+                    <input type="hidden" name="drink_image" value="<%- obj.image %>">
+                    <input type="hidden" name="drink_instructions" value="<%- obj.instructions%>">
+                    <input type="hidden" name="drink_glass" value="<%-obj.glass%>">
+                    <button >Save To Menu</button>
+                  </form>
+                </div>
+                <% }) %>
+          <% } %>
+        </section>
+      </main>      
+      <footer>
+          <!-- replace this with a partial? -->
+  
+      </footer>
+    <!-- </div> -->
+    <script src="/js/index.js"></script>
+  </body>
+</html>

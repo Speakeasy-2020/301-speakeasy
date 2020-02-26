@@ -18,16 +18,18 @@ app.set('view engine', 'ejs');
 app.get('/', homePage);
 app.get('/event', eventRender);
 app.get('/guestList', guestListRender);
-app.get('/menuRender', savedDatabase);
-// app.get('/menuRender/search', drinkRender);
+app.get('/menuRender', savedDrinksRender);
+app.post('/menuRender/search', drinkRender);
 app.get('/publicView', publicPage);
-// app.get('/savedDrink', savedDatabase);
+app.post('/drinksDatabase', drinksTableDB);
 
 app.post('/event', storeUser);
 app.delete('/guests/:id', deleteGuest);
+app.delete('/drink/:id', deleteDrink);
+
 
 // Convert to unix time
-Date.prototype.unixTime = function(){return this.getTime()/1000|0;};
+Date.prototype.unixTime = function(){return this.getTime() / 1000 | 0;};
 
 function storeUser (request, response) {
   let username = request.body.username;
@@ -62,6 +64,8 @@ function createEvent (request, response) {
   VALUES ($1, $2, $3, $4, $5) RETURNING *
   `;
   let values = [eventsOwner, eventTitle, eventUnixTime, eventLocation, eventDescription];
+  let SQLguest = `INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('${app.locals.activeUser}', '${app.locals.activeEvent}', '${app.locals.activeUser}', TRUE);`;
+  client.query(SQLguest);
   client.query(SQL, values)
     .then( (results) => {
       console.log('event values', results.rows);
@@ -69,10 +73,6 @@ function createEvent (request, response) {
       guestListRender(request, response);
     });
 }
-
-app.post('/menuRender', (req, res) => {
-  res.render('pages/main/menuRender.ejs');
-});
 
 app.post('/guestInput', addGuest);
 
@@ -105,14 +105,24 @@ function deleteGuest (request, response) {
     .catch(err => console.log(err));
 }
 
-function savedDatabase(req, res) {
+function savedDrinksRender(req, res) {
   let SQL = `SELECT * FROM drinks`;
   // let SQL2 = `SELECT * FROM recipes`;
 
   client.query(SQL)
     .then(data => {
-      console.log(data);
       res.render('pages/main/menuRender.ejs', { databaseResults: data.rows, });
+    })
+    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
+}
+
+function deleteDrink(req, res) {
+  let SQL = `DELETE FROM drinks WHERE id = $1`;
+  let values = [req.params.id];
+
+  return client.query(SQL, values)
+    .then(() => {
+      savedDrinksRender(req, res);
     })
     .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
 }
@@ -125,14 +135,28 @@ function eventRender(req, res) {
   res.render('pages/main/event.ejs');
 }
 
+function drinksTableDB (req, res) {
+  let drinkID = req.body.drink_id;
+  let name = req.body.drink_drinkTitle;
+  let image = req.body.drink_image;
+  let glass = req.body.drink_glass;
+  let instructions = req.body.drink_instructions;
+
+  let SQL = `INSERT INTO drinks ( cocktailID, drinkTitle, thumbnail, instructions, glass) VALUES ($1, $2, $3, $4, $5);`;
+  let values = [drinkID, name, image, instructions, glass];
+  return client.query(SQL, values)
+    .then(() => {
+      savedDrinksRender(req, res);
+    })
+    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
+}
+
 function guestListRender(req, res) {
-  // let user = app.locals.activeUser;
   let SQL = `
-  SELECT * from guests
+  SELECT * FROM guests WHERE eventOwner = '${app.locals.activeUser}' AND eventTitle = '${app.locals.activeEvent}'
   `;
   client.query(SQL)
     .then( (results) => {
-      console.log(results.rows);
       res.render('pages/main/guestList', { guests: results.rows});
     });
 }
@@ -150,22 +174,19 @@ function publicPage(req, res) {
     .catch(err => console.log(err));
 }
 
-function menuPage(req, res) {
-  res.render('pages/main/menuRender');
+function drinkRender(req, res) {
+  let drink = req.body.search;
+  console.log(drink);
+  let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`;
+  console.log(url);
+  superagent.get(url)
+    .then(data => {
+      // console.log(data);
+      let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
+      res.render('pages/main/drinkSearch', {searchResults: drinkResults });
+    })
+    .catch(err => console.log(err));
 }
-
-
-// function drinkRender(req, res) {
-//   let drink = req.body.search;
-//   let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`;
-//   console.log(url);
-//   superagent.get(url)
-//     .then(data => {
-//       console.log(data);
-//       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
-//       res.render('pages/main/menuRender', {searchResults: drinkResults, });
-//     });
-// }
 
 function Drinks(info) {
   this.id = info.idDrink;
@@ -181,6 +202,7 @@ app.get('*', (req, response) => response.status(404).send('This route does not e
 function errorHandler(error, req, response) {
   response.status(500).send(error);
 }
+// Still need errorPage.ejs
 
 // function startServer(){
 //   const PORT = process.env.PORT || 3000;
@@ -193,3 +215,4 @@ client.connect()
     app.listen(process.env.PORT, () => console.log(`up on ${process.env.PORT}`));
   })
   .catch(() => console.log('port client issue'));
+

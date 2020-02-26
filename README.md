@@ -105,6 +105,13 @@ Working - version x.x.X
 
 **6:00pm:** Still trying to get guest data flowing. Hit blockers getting menu data flowing. We are all tired and beat so gonna head home to rest up and try more another day. But lots of good progress happened today. 
 
+### Day 6 // 2020.02.24
+
+**6:30pm:** We are all here. Brett got our event function and page working well. Data posts to public view. We still need to get work done on guest page data flow and menu page data flow.
+
+**7:10pm:** We merged everything together so master branch is up to date.
+
+**9:30pm:** Tonight we got the guest view data flowing and info showing to the page. We got the menu view data (mostly) flowing and info showing to the page. We are very close to MVP. Tomorrow we will need to get the menu view delete and save to database functions going. Then we need to get the public view showing the guest and menu data. That will be MVP. 
 
 ## Credit
  
