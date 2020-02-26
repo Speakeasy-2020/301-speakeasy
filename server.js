@@ -115,9 +115,9 @@ function savedDrinksRender(req, res) {
     c.eventsOwner = $1
     AND c.title = $2
   ;`;
-  values = [app.locals.activeUser, app.locals.activeEvent];
+  let values = [app.locals.activeUser, app.locals.activeEvent];
 
-  client.query(SQL, valus)
+  client.query(SQL, values)
     .then(data => {
       res.render('pages/main/menuRender.ejs', { databaseResults: data.rows, });
     })
