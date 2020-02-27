@@ -17,19 +17,18 @@
 
     <main>
       <div id="publicEventName">
-        <h1><%- events.title %>events.title</h1>
-        <p><%- events.eventsowner %>events.eventsowner<br>
-          <%- events.date %>events.date<br>
-          <%- events.location %>events.location
+        <h1><%- events[0].title %></h1>
+        <p><%- events[0].eventsowner %><br>
+          <%- events[0].date %><br>
+          <%- events[0].location %>
         </p>
-        <p><%- events.description %>events.description</p>
+        <p><%- events[0].description %>ription</p>
       </div>
 
       <div id="publicGuestDisplay">
         <% guests.forEach(guest => { %>
           <h2><%- guest.guestname %></h2>
         <% }) %>
-        <p>Guest List Placeholder</p>
       </div>
 
       <div id="publicMenuDisplay">
@@ -38,7 +37,6 @@
           <img style="height: 60px; width: 45px" src="<%- drink.a_img %>" />
           <p><%- drink.a_instructions %></p>
         <% }) %>
-        <p>Menu List Placeholder</p>
       </div>
     </main>
 
