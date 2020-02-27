@@ -198,6 +198,7 @@ function publicPage(req, res) {
         .then(guests => {
           client.query(menuSQL, values)
             .then(menu => {
+              console.log(events.rows);
               return res.render('pages/main/publicView', {events: events.rows, guests: guests.rows, menu: menu.rows})
 
             })
