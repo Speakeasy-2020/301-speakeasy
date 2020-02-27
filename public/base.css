@@ -1,0 +1,11 @@
+body {
+    font-family: 'Rye';
+    font-size: large;
+    background-image: url("/images/woodpanel.jpg");
+    background-size: cover;
+  }
+
+  img {
+    width: 60px;
+    height: 70px;
+  }

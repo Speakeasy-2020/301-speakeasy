@@ -1,0 +1,31 @@
+{
+  "name": "301-speakeasy",
+  "version": "1.0.0",
+  "description": "A space for our final Code Fellows 301 group project!",
+  "main": "server.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "nodemon": "^2.0.2",
+    "pg": "^7.18.2",
+    "superagent": "^5.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Speakeasy-2020/301-speakeasy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Speakeasy-2020/301-speakeasy/issues"
+  },
+  "homepage": "https://github.com/Speakeasy-2020/301-speakeasy#readme"
+}

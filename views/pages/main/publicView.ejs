@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Speakeasy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%- include('../partials/header.ejs') %> 
+</head>
+
+<body>
+  <!-- <div class="mobile-container"> -->
+    <header>
+      <div class="topnav">
+        <%- include('../partials/navBar.ejs') %>
+      </div>
+    </header>
+
+    <main>
+      <div id="publicEventName">
+        <h1><%- events[0].title %></h1>
+        <p><%- events[0].eventsowner %><br>
+          <%- events[0].date %><br>
+          <%- events[0].location %>
+        </p>
+        <p><%- events[0].description %>ription</p>
+      </div>
+
+      <div id="publicGuestDisplay">
+        <% guests.forEach(guest => { %>
+          <h2><%- guest.guestname %></h2>
+        <% }) %>
+      </div>
+
+      <div id="publicMenuDisplay">
+        <% menu.forEach(drink => { %>
+          <h2><%- drink.a_drink %></h2>
+          <img style="height: 60px; width: 45px" src="<%- drink.a_img %>" />
+          <p><%- drink.a_instructions %></p>
+        <% }) %>
+      </div>
+    </main>
+
+  <footer>
+      <!-- replace this with a partial? -->
+  </footer>
+  <script src="/js/index.js"></script>
+</body>
+</html>

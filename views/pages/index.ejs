@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Speakeasy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%- include('partials/header.ejs') %>    
+  </head>
+  <body>
+    <!-- <div class="mobile-container"> -->
+      <header>
+        <div class="topnav">
+          <%- include('partials/navBar.ejs') %>
+        </div>
+      </header>
+
+      <div id="form">
+        <form id="newuser" action="/event" method="post" class="newUserButton">
+         <label for="username">Name of user:</label><br>
+         <input type="text" id="username" name="username" placeholder="Enter name here" required></br>
+         <button id="eventnamesubmit" type="submit" value="Submit">Submit</button>
+        </form>
+      </div>
+    <!-- </div>   for mobile container -->
+      <footer>
+        <!-- Footer here, or remove? -->
+      </footer>
+    <script src="js/index.js"></script>
+  </body>
+</html>
