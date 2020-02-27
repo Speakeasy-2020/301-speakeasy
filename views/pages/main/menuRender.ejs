@@ -17,11 +17,13 @@
       </header>
       <main>
         <div id="searchForDrink">
-          <h2>Look for a drink!!</h2>
-          <form action="/menuRender/search" method="POST" >
-          <input type="text" name="search" placeholder="Enter A Drink">
-          <button type="submit">Take A Look</button>
-          </form>
+          <h2>Look For a Drink!</h2></br>
+          <div id="drinkForm">
+            <form action="/menuRender/search" method="POST" >
+            <input type="text" name="search" placeholder="Enter A Drink"></br>
+            <button id="drinkSearchButton" type="submit">Take A Look</button>
+            </form>
+          </div>
         </div>
         <section id="savedMenu">
           <% if (typeof(databaseResults) !== 'undefined') { %>

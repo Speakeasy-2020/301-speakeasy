@@ -62,7 +62,7 @@ footer {
 }
 
 #eventform{
-  width: 75%;
+  width: 50%;
   text-align: center;
   padding-top: 1.5em;
   margin: 5% auto;
@@ -190,34 +190,41 @@ p {
   font-weight: bold;
 }
 
-#publicEventName {
+#searchForDrink {
   background-color:  rgba(223, 216, 195, 0.3);
-  width: 75%;
+  width: 40%;
+  height: 7em;
+  margin-top: 30px;
+  border-radius: 12px;
+  border: ridge 10px  #cda24c;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0.5em;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
   text-align: center;
-  margin: 5% auto;
-  height: 10em;
-  border-radius: 25px;
 }
 
-#publicGuestDisplay {
-  background-color:  rgba(223, 216, 195, 0.3);
-  width: 75%;
+#drinkForm {
   text-align: center;
-  margin: 5% auto;
-  height: 10em;
-  border-radius: 25px;
+  margin: auto;
 }
 
-#publicMenuDisplay {
-  background-color:  rgba(223, 216, 195, 0.3);
-  width: 75%;
+#drinkSearchButton {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
   text-align: center;
-  margin: 5% auto;
-  height: 10em;
+  background-color: #cda24c;
+  border: none;
   border-radius: 25px;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: medium;
+  font-weight: bold;
 }
-
-
 
 #menuSection {
   background-color:  rgba(223, 216, 195, 0.3);
@@ -270,3 +277,40 @@ p {
   border: 3px solid #cda24c;
   
 }
+
+#publicEventName {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 60%;
+  text-align: center;
+  margin: 5% auto;
+  height: 10em;
+  border-radius: 12px;
+  border: ridge 10px  #cda24c;
+  padding-top: 0.5em;
+  overflow: scroll;
+}
+
+#publicGuestDisplay {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 60%;
+  text-align: center;
+  margin: 5% auto;
+  height: 10em;
+  border-radius: 12px;
+  border: ridge 10px  #cda24c;
+  padding-top: 0.5em;
+  overflow: scroll;
+}
+
+#publicMenuDisplay {
+  background-color:  rgba(223, 216, 195, 0.3);
+  width: 60%;
+  text-align: center;
+  margin: 5% auto;
+  height: 10em;
+  border-radius: 12px;
+  border: ridge 10px  #cda24c;
+  padding-top: 0.5em;
+  overflow: scroll;
+}
+
