@@ -32,7 +32,7 @@
                 <img class="drinkImage" src="<%- obj.a_img %>" alt="">
                 <h2><%= obj.a_drink %></h2>
                 <p> <%= obj.a_instructions %> </p>
-                <form action="/drink/<%= obj.id %>?_method=delete" method="POST">
+                <form action="/drink/<%= obj.a_drink %>?_method=delete" method="POST">
                   <button type="submit">Remove</button>
                 </form>
               </div>

@@ -33,7 +33,7 @@ app.post('/guestInput', addGuest);
 
 //app.delete requests
 app.delete('/guests/:id', deleteGuest);
-app.delete('/drink/:id', deleteDrink);
+app.delete('/drink/:drinkTitle', deleteDrink);
 
 /////Home Page Functions
 function homePage(req, res) {
@@ -156,21 +156,10 @@ function savedDrinksRender(req, res) {
       weeWooRender(req, res);
     });
 }
-function deleteGuest (req, res) {
-  let SQL = 'DELETE FROM guests where id=$1';
-  let values = [req.params.id];
-  return client.query(SQL, values)
-    .then((results) => {
-      guestListRender(req, res);
-    })
-    .catch(() => {
-      weeWooRender(req, res);
-    });
-}
 
 function deleteDrink(req, res) {
-  let SQL = `DELETE FROM drinks WHERE id = $1`;
-  let values = [req.params.id];
+  let SQL = `DELETE FROM drinks WHERE drinkTitle = $1`;
+  let values = [req.params.drinkTitle];
   console.log(values);
 
   return client.query(SQL, values)
