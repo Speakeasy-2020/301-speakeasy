@@ -113,6 +113,20 @@ Working - version x.x.X
 
 **9:30pm:** Tonight we got the guest view data flowing and info showing to the page. We got the menu view data (mostly) flowing and info showing to the page. We are very close to MVP. Tomorrow we will need to get the menu view delete and save to database functions going. Then we need to get the public view showing the guest and menu data. That will be MVP. 
 
+### Day 7 // 2020.02.25
+
+**6:30pm:** We are mob programming to figure out the menu page data flow.
+
+**7:20pm:** We made lots of great progress on the Menu page. Data is rendering. We can save to database. It displays on the saved section. We added delete buttons. We created a discrete Search results page. But then we tried to merge it all and hit a critical merge conflict. It broke some code from just now to last night. We are trying to work through the issues right now. 
+
+**8:20pm:** Finally fixed all the weird merge conflicts. In the process of merging to master to bring it all back to normal.
+
+**9:00pm:** Master is looking good. We successfully fixed stuff and have merged Kai’s CSS changes to master. Currently getting the user-specific data changes worked out with Brett’s guidance. This should take us to MVP tonight. 
+
+**9:30pm:** We went down the rabbit hole trying to get our menu data to be user-specific. We weren’t able to figure it out tonight but Brett will put in work before tomorrow to get it working.
+
+
+
 ## Credit
  
 * [Nav bar code](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_mobile_navbar)

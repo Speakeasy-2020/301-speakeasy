@@ -37,9 +37,7 @@ function storeUser (request, response) {
   INSERT INTO users (userName)
   VALUES ($1)`;
   let values = [username];
-  console.log(request.body.username);
   app.locals.activeUser = username;
-  console.log(app.locals.activeUser);
   client.query(SQL, values)
     .then( () => {
       response.render('pages/main/event.ejs');
@@ -66,9 +64,8 @@ function createEvent (request, response) {
   let values = [eventsOwner, eventTitle, eventUnixTime, eventLocation, eventDescription];
   let SQLguest = `INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('${app.locals.activeUser}', '${app.locals.activeEvent}', '${app.locals.activeUser}', TRUE);`;
   client.query(SQLguest);
-  client.query(SQL, values)
+  return client.query(SQL, values)
     .then( (results) => {
-      console.log('event values', results.rows);
       // response.render('pages/main/guestList.ejs');
       guestListRender(request, response);
     });
@@ -106,10 +103,21 @@ function deleteGuest (request, response) {
 }
 
 function savedDrinksRender(req, res) {
-  let SQL = `SELECT * FROM drinks`;
-  // let SQL2 = `SELECT * FROM recipes`;
+  let SQL = `SELECT DISTINCT
+    a.drinkTitle AS a_drink,
+    a.thumbnail AS a_img,
+    a.instructions AS a_instructions
+  FROM
+    drinks a
+  LEFT JOIN eventsMenus b ON a.cocktailID = b.cocktailID
+  LEFT JOIN events c ON b.eventsID = c.title
+  WHERE
+    c.eventsOwner = $1
+    AND c.title = $2
+  ;`;
+  let values = [app.locals.activeUser, app.locals.activeEvent];
 
-  client.query(SQL)
+  client.query(SQL, values)
     .then(data => {
       res.render('pages/main/menuRender.ejs', { databaseResults: data.rows, });
     })
@@ -142,9 +150,16 @@ function drinksTableDB (req, res) {
   let glass = req.body.drink_glass;
   let instructions = req.body.drink_instructions;
 
-  let SQL = `INSERT INTO drinks ( cocktailID, drinkTitle, thumbnail, instructions, glass) VALUES ($1, $2, $3, $4, $5);`;
+  let SQL = `INSERT INTO drinks (cocktailID, drinkTitle, thumbnail, instructions, glass) VALUES ($1, $2, $3, $4, $5);`;
+  let SQL2 = `INSERT INTO eventsMenus (cocktailID, eventsID) VALUES ($1, $2);`;
   let values = [drinkID, name, image, instructions, glass];
+  let values2 = [drinkID, app.locals.activeEvent];
   return client.query(SQL, values)
+    .then(() => {
+      return client.query(SQL2, values2)
+        .then((data) => {
+        })
+    })
     .then(() => {
       savedDrinksRender(req, res);
     })
@@ -152,26 +167,49 @@ function drinksTableDB (req, res) {
 }
 
 function guestListRender(req, res) {
-  let SQL = `
-  SELECT * FROM guests WHERE eventOwner = '${app.locals.activeUser}' AND eventTitle = '${app.locals.activeEvent}'
-  `;
-  client.query(SQL)
+  let SQL = `SELECT * FROM guests WHERE eventOwner = $1 AND eventTitle = $2;`;
+  let values = [app.locals.activeUser, app.locals.activeEvent];
+  client.query(SQL, values)
     .then( (results) => {
       res.render('pages/main/guestList', { guests: results.rows});
     });
 }
 
 function publicPage(req, res) {
-  let activeUser = 'Rubiksron'; // let activeUser = app.locals.activeUser;
-  let activeEvent = 'Class party'; // let activeEvent = app.locals.activeEvent;
-  let eventValues = [activeUser, activeEvent];
   let eventSQL = `SELECT eventsOwner, title, to_timestamp(TRUNC(CAST(date AS bigint))) AT time zone 'utc' AS date, location, description FROM events WHERE eventsOwner = $1 AND title = $2;`;
+  let guestsSQL = `SELECT * FROM guests WHERE eventOwner = $1 AND eventTitle = $2;`;
+  let menuSQL = `SELECT DISTINCT
+  a.drinkTitle AS a_drink,
+  a.thumbnail AS a_img,
+  a.instructions AS a_instructions
+  FROM
+  drinks a
+  LEFT JOIN eventsMenus b ON a.cocktailID = b.cocktailID
+  LEFT JOIN events c ON b.eventsID = c.title
+  WHERE
+  c.eventsOwner = $1
+  AND c.title = $2
+  ;`;
+  let values = [app.locals.activeUser, app.locals.activeEvent];
 
-  client.query(eventSQL, eventValues)
-    .then( results => {
-      return res.render('pages/main/publicView', {results: results.rows[0]});
-    })
-    .catch(err => console.log(err));
+  client.query(eventSQL, values)
+    .then( events => {
+      client.query(guestsSQL, values)
+        .then(guests => {
+          client.query(menuSQL, values)
+            .then(menu => {
+              console.log(events.rows);
+              return res.render('pages/main/publicView', {events: events.rows, guests: guests.rows, menu: menu.rows})
+
+            })
+        })
+      })
+
+  // client.query(eventSQL, eventValues)
+  //   .then( results => {
+  //     return res.render('pages/main/publicView', {results: results.rows[0]});
+  //   })
+  //   .catch(err => console.log(err));
 }
 
 function drinkRender(req, res) {

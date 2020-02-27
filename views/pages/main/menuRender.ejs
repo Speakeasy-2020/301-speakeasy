@@ -29,9 +29,9 @@
           <% if (typeof(databaseResults) !== 'undefined') { %>
             <% databaseResults.map(obj => { %>
               <div class="DBItems">
-                <img src="<%- obj.thumbnail %>" alt="">
-                <h2><%= obj.drinktitle %></h2>
-                <p> <%= obj.instructions %> </p>
+                <img src="<%- obj.a_img %>" alt="">
+                <h2><%= obj.a_drink %></h2>
+                <p> <%= obj.a_instructions %> </p>
                 <form action="/drink/<%= obj.id %>?_method=delete" method="POST">
                   <button type="submit">Remove</button>
                 </form>
