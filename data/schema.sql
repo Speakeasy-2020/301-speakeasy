@@ -44,7 +44,7 @@ CREATE TABLE recipes (
 
 CREATE TABLE eventsMenus (
   id SERIAL PRIMARY KEY,
-  eventsID INTEGER,
+  eventsID VARCHAR(64),
   cocktailID INTEGER,
   isChecked BOOLEAN
 );
