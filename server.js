@@ -22,7 +22,7 @@ app.get('/menuRender', savedDrinksRender);
 app.post('/menuRender/search', drinkRender);
 app.get('/publicView', publicPage);
 app.post('/drinksDatabase', drinksTableDB);
-
+app.get('/weeWooPage', weeWooRender);
 app.post('/event', storeUser);
 app.delete('/guests/:id', deleteGuest);
 app.delete('/drink/:id', deleteDrink);
@@ -99,7 +99,9 @@ function deleteGuest (request, response) {
     .then(() => {
       guestListRender(request, response);
     })
-    .catch(err => console.log(err));
+    .catch(() => {
+      weeWooRender(request, response);
+    });
 }
 
 function savedDrinksRender(req, res) {
@@ -121,7 +123,9 @@ function savedDrinksRender(req, res) {
     .then(data => {
       res.render('pages/main/menuRender.ejs', { databaseResults: data.rows, });
     })
-    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 }
 
 function deleteDrink(req, res) {
@@ -132,7 +136,9 @@ function deleteDrink(req, res) {
     .then(() => {
       savedDrinksRender(req, res);
     })
-    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 }
 
 function homePage(req, res) {
@@ -158,12 +164,14 @@ function drinksTableDB (req, res) {
     .then(() => {
       return client.query(SQL2, values2)
         .then((data) => {
-        })
+        });
     })
     .then(() => {
       savedDrinksRender(req, res);
     })
-    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 }
 
 function guestListRender(req, res) {
@@ -172,7 +180,11 @@ function guestListRender(req, res) {
   client.query(SQL, values)
     .then( (results) => {
       res.render('pages/main/guestList', { guests: results.rows});
+    })
+    .catch(() => {
+      weeWooRender(req, res);
     });
+
 }
 
 function publicPage(req, res) {
@@ -196,20 +208,17 @@ function publicPage(req, res) {
     .then( events => {
       client.query(guestsSQL, values)
         .then(guests => {
-          client.query(menuSQL, values)
+          return client.query(menuSQL, values)
             .then(menu => {
               console.log(events.rows);
-              return res.render('pages/main/publicView', {events: events.rows, guests: guests.rows, menu: menu.rows})
+              return res.render('pages/main/publicView', {events: events.rows, guests: guests.rows, menu: menu.rows});
+            });
+        });
+    })
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 
-            })
-        })
-      })
-
-  // client.query(eventSQL, eventValues)
-  //   .then( results => {
-  //     return res.render('pages/main/publicView', {results: results.rows[0]});
-  //   })
-  //   .catch(err => console.log(err));
 }
 
 function drinkRender(req, res) {
@@ -223,7 +232,9 @@ function drinkRender(req, res) {
       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
       res.render('pages/main/drinkSearch', {searchResults: drinkResults });
     })
-    .catch(err => console.log(err));
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 }
 
 function Drinks(info) {
@@ -237,16 +248,12 @@ function Drinks(info) {
 
 app.get('*', (req, response) => response.status(404).send('This route does not exist'));
 
+function weeWooRender(request, response) {
+  response.status(500).render('pages/errorPage');
+}
 function errorHandler(error, req, response) {
   response.status(500).send(error);
 }
-// Still need errorPage.ejs
-
-// function startServer(){
-//   const PORT = process.env.PORT || 3000;
-//   app.listen(PORT, () => console.log(`Server up on port ${PORT}`));
-// }
-// startServer();
 
 client.connect()
   .then(() => {
