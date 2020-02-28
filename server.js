@@ -160,7 +160,6 @@ function savedDrinksRender(req, res) {
 function deleteDrink(req, res) {
   let SQL = `DELETE FROM drinks WHERE drinkTitle = $1`;
   let values = [req.params.drinkTitle];
-  console.log(values);
 
   return client.query(SQL, values)
     .then((data) => {
@@ -198,12 +197,9 @@ function drinksTableDB (req, res) {
 
 function drinkRender(req, res) {
   let drink = req.body.search;
-  console.log(drink);
   let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`;
-  console.log(url);
   superagent.get(url)
     .then(data => {
-      // console.log(data);
       let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
       res.render('pages/main/drinkSearch', {searchResults: drinkResults });
     })
@@ -245,7 +241,6 @@ function publicPage(req, res) {
         .then(guests => {
           return client.query(menuSQL, values)
             .then(menu => {
-              console.log(events.rows);
               return res.render('pages/main/publicView', {events: events.rows, guests: guests.rows, menu: menu.rows});
             });
         });
