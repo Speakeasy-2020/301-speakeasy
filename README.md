@@ -7,16 +7,48 @@ A space for our final Code Fellows 301 group project!
 * Daniel Nguyen
 * Brett Packard
 * Thomas Sherer
+
+## Project Summary
+
+Our original plan for this project was to build an app to help folks plan a cocktail party. We wanted a way for a host to coordinate drinks and ingredients with a chosen list of guests. Those guests would be able to view a list of drinks and related ingredients and note which of those they would be contributing to the party. After iterating through user flows and getting into the data structures, we had to downsize the scope of our app. It now allows the host to build event information, tie that event to a list of guests, and build a list of drinks for that event. The final product is a public view that the host can share with their guests. It is now more of an informational party-builder rather than a cooperative party-builder.
+
+The API we are using is [The Cocktail DB.](https://www.thecocktaildb.com)
+
+## User Flow
+
+### User View
+
+Here the user can enter a name. That name is a foreign key for all other data tables. So event, guest, and menu data will all be tied to that specific user. A new user will have a fresh data set displayed.
+
+<img src="https://github.com/Speakeasy-2020/301-speakeasy/blob/master/img.readme/User%20View.png" width="500">
+
+### Event View
+
+The event view captures Name, Date, Time, Location (as a string), and Event Description (as a string). All fields are required to move onto the next page. The date and time entities took quite a bit of manual backend work. Those features work best on Chrome and do not work on Safari.
+
+<img src="https://github.com/Speakeasy-2020/301-speakeasy/blob/master/img.readme/Event%20View.png" width="500">
  
-## Elements still needed
-- [ ] Project Summary
-- [ ] Link to project board
-- [ ] User Stories
-- [x] Wireframes
-- [x] DOM model
-- [ ] Database Entity-Relationship-Diagram
-- [ ] Software requirements doc
-- [x] Team Agreement
+### Guest View
+
+This view allows the host to add and delete a list of guests. The host is automatically added to this list by default. This was a necessary workaround as the page rendering function requires data in the database in order to run correctly. So we plopped the user in there as a guest in order to make that function run upon initial page load for a new user.
+
+<img src="https://github.com/Speakeasy-2020/301-speakeasy/blob/master/img.readme/Guest%20View.png" width="500">
+
+### Menu View
+
+This view allows the user to search for a drink, add the drink to a saved menu, and display that saved menu on a static page. This was our most complicated page by far. And for most of the project, all of those functions happened on the same page. Only late into the project did we create a distinct search results page. This allowed us to save some real estate as we did not have to display search results and a saved menu within the same space.
+
+<img src="https://github.com/Speakeasy-2020/301-speakeasy/blob/master/img.readme/Menu%20Render.png" width="500">
+
+### Public View
+
+This view displays all the gathered information from the previous pages. It was originally intended to allow guest-input such that the host can share the page to guests and guests can mark themselves as Attending + also mark that they will bring ingredients for particular drinks. You can see the framework for that functionality in our schema.sql. However, as we got deeper into the project, we realized that we did not have time to fully implement these features. Perhaps if we had another few days!
+
+<img src="https://github.com/Speakeasy-2020/301-speakeasy/blob/master/img.readme/Public%20View.png" width="500">
+
+### [Deployed Site](http://speakeasy301.herokuapp.com)
+
+### [Project Board](https://github.com/Speakeasy-2020/301-speakeasy/projects/1)
 
 ## Wireframes
 [DrawIO link](https://drive.google.com/file/d/1m-pou0d5mqEFRaVxVLnmE693JFPeopVm/view?usp=sharing)
@@ -125,7 +157,25 @@ Working - version x.x.X
 
 **9:30pm:** We went down the rabbit hole trying to get our menu data to be user-specific. We weren’t able to figure it out tonight but Brett will put in work before tomorrow to get it working.
 
+### Day 8 // 2020.02.26
 
+**6:30pm:** Checking in to start. Menu data is passing with user data attached. Guest list data is passing as well. We need to get the event data figured out tonight in order to hit MVP. Edit: we got it!
+
+**6:45pm:** We are all here. Getting Kai’s CSS updates merged to master. Also getting the site deployed to Heroku. 
+
+**7:15pm:** Site is deployed on Heroku. Now we are going to fix some minor issues. Clean up the code a bit. SMACCS the CSS. Build out a nicer error page. 
+
+**8:00pm:** Error page is working. We cleaned up server.js formatting a bit. Now trying to reorganize our functions. 
+
+**8:30pm:** In refactoring, we discovered that our delete drink function is not working correctly. Looking to fix.
+
+**8:45pm:** Finally fixed the delete drink function. Committing. Going to probably call it a night now. Too many ups and downs tonight. 
+
+### Day 9 // 2020.02.27
+
+**6:30pm:** Today we are going to get final touches in. Maybe a little CSS leftover. Flesh out the ReadMe. And then work on our presentation PowerPoint. The goal is to have everything wrapped up so we can all leave early and get some sleep tonight!
+
+**7:30pm:** PowerPoint is looking good. ReadMe is almost all polished up. We will finish these up and rehearse our presentation a bit before heading home early. A job well done!
 
 ## Credit
  
