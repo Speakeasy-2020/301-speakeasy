@@ -226,6 +226,21 @@ p {
   font-weight: bold;
 }
 
+#drinkButton {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+  text-align: center;
+  background-color: #cda24c;
+  border: none;
+  border-radius: 25px;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: medium;
+  font-weight: bold;
+}
+
 #savedMenu {
  background-color:  rgba(223, 216, 195, 0.3);
   width: 60%;
@@ -240,6 +255,10 @@ p {
   background-color:  rgba(223, 216, 195, 0.3);
   width: 70%;
   height: 25em;
+  border-radius: 12px;
+  border: ridge 10px  #cda24c;
+  text-align: center;
+  overflow: scroll;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -251,8 +270,6 @@ p {
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 5px;
-  text-align: center;
-  overflow: scroll;
 }
 
 .menuItems {
@@ -319,6 +336,22 @@ p {
   margin-left: auto;
   margin-right: auto;
   width: 25%;
+  text-align: center;
+  background-color: #cda24c;
+  border: none;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: medium;
+  font-weight: bold;
+}
+
+#saveMenuButton {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 35%;
   text-align: center;
   background-color: #cda24c;
   border: none;
