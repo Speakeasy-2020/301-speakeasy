@@ -33,14 +33,14 @@
                 <h2><%= obj.a_drink %></h2>
                 <p> <%= obj.a_instructions %> </p>
                 <form action="/drink/<%= obj.a_drink %>?_method=delete" method="POST">
-                  <button type="submit">Remove</button>
+                  <button id="removeDrinkButton" type="submit">Remove</button>
                 </form>
               </div>
             <% }) %>
           <% } %>
         </section>
       <form action="/publicView" method="GET">
-      <button>Save</button>
+      <button id="saveDrinkMenuButton">Save</button>
       </form>
     </main>
 
