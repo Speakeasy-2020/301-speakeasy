@@ -27,7 +27,7 @@
           <% if (typeof(searchResults) !== 'undefined') { %>
             <% searchResults.map(obj => { %>
               <div class="menuItems">
-                <img src="<%- obj.image  %>" alt="">
+                <img class="drinkImage" src="<%- obj.image  %>" alt="">
                 <h2><%= obj.name %></h2>
                 <p> <%= obj.instructions %> </p>
                 <h3>Ingredients</h3>

@@ -226,15 +226,33 @@ p {
   font-weight: bold;
 }
 
+#savedMenu {
+ background-color:  rgba(223, 216, 195, 0.3);
+  width: 60%;
+  height: 12em;
+  border-radius: 12px;
+  border: ridge 10px  #cda24c;
+  text-align: center;
+  overflow: scroll;
+}
+
 #menuSection {
   background-color:  rgba(223, 216, 195, 0.3);
-  width: 50%;
-  height: 20em;
+  width: 70%;
+  height: 25em;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
-  margin: 5% auto;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0.5em;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  text-align: center;
+  overflow: scroll;
 }
 
 .menuItems {
@@ -255,14 +273,32 @@ p {
 
 #savedMenu {
   background-color:  rgba(223, 216, 195, 0.3);
-  width: 50%;
-  margin: 10% auto;
-  height: 10em;
+  width: 70%;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  height: 15em;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
   border-radius: 12px;
+}
+
+#removeDrinkButton {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  text-align: center;
+  background-color: #cda24c;
+  border: none;
+  border-radius: 25px;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: medium;
+  font-weight: bold;
 }
 
 .DBItems > h2 {
@@ -273,9 +309,25 @@ p {
   display: flex;
   flex-direction: column;
   width: 30%;
-  height: 250px;
-  border: 3px solid #cda24c;
+  height: 300px;
+  border: 3px ridge #cda24c;
   
+}
+
+#saveDrinkMenuButton {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+  text-align: center;
+  background-color: #cda24c;
+  border: none;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  font-family: 'Rye';
+  font-size: medium;
+  font-weight: bold;
 }
 
 #publicEventName {

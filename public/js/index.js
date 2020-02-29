@@ -8,10 +8,3 @@ function navBar() {
     x.style.display = "block";
   }
 }
-
-//guest list add on submit
-$("#nameListSubmit").on("click", guestClick);
-
-function guestClick() {
-  console.log('click submit fired');
-}

@@ -8,31 +8,40 @@ const pg = require('pg');
 const client = new pg.Client(process.env.DATABASE_URL);
 const methodOverride = require('method-override');
 
-// app.get('*', (req, res) => { res.sendFile('index.html', { root: './public' }); });
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true, }));
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
 // Server endpoints
+
+//app.get requests
 app.get('/', homePage);
 app.get('/event', eventRender);
 app.get('/guestList', guestListRender);
 app.get('/menuRender', savedDrinksRender);
-app.post('/menuRender/search', drinkRender);
 app.get('/publicView', publicPage);
+app.get('/weeWooPage', weeWooRender);
+
+//app.post requests
+app.post('/menuRender/search', drinkRender);
 app.post('/drinksDatabase', drinksTableDB);
-
 app.post('/event', storeUser);
+app.post('/guestList', createEvent);
+app.post('/guestInput', addGuest);
+
+
+//app.delete requests
 app.delete('/guests/:id', deleteGuest);
-app.delete('/drink/:id', deleteDrink);
+app.delete('/drink/:drinkTitle', deleteDrink);
 
+/////Home Page Functions
+function homePage(req, res) {
+  res.render('pages/index.ejs');
+}
 
-// Convert to unix time
-Date.prototype.unixTime = function(){return this.getTime() / 1000 | 0;};
-
-function storeUser (request, response) {
-  let username = request.body.username;
+function storeUser (req, res) {
+  let username = req.body.username;
   let SQL = `
   INSERT INTO users (userName)
   VALUES ($1)`;
@@ -40,23 +49,27 @@ function storeUser (request, response) {
   app.locals.activeUser = username;
   client.query(SQL, values)
     .then( () => {
-      response.render('pages/main/event.ejs');
+      res.render('pages/main/event.ejs');
     })
-    .catch(() => errorHandler('Error 500 ! Something has gone!', request, response));
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 }
 
-app.post('/guestList', createEvent);
+/////Event Menu Page Functions
+function eventRender(req, res) {
+  res.render('pages/main/event.ejs');
+}
 
-function createEvent (request, response) {
+function createEvent (req, res) {
   let eventsOwner = app.locals.activeUser;
-  let eventTitle = request.body.eventTitle;
+  let eventTitle = req.body.eventTitle;
   app.locals.activeEvent = eventTitle;
-  let eventDate = new Date(request.body.eventDate);
-  let leapModifier = Math.trunc((eventDate.getUTCFullYear() - 1968) / 4); // Might not need this.
-  let eventTime = request.body.eventTime;
+  let eventDate = new Date(req.body.eventDate);
+  let eventTime = req.body.eventTime;
   let eventUnixTime = new Date(eventDate.getUTCFullYear(), eventDate.getUTCMonth(), eventDate.getUTCDate(), parseInt(eventTime[0] + eventTime[1]) + 16, parseInt(eventTime[3] + eventTime[4]), 0, 0).unixTime();
-  let eventLocation = request.body.eventLocation;
-  let eventDescription = request.body.eventDescription;
+  let eventLocation = req.body.eventLocation;
+  let eventDescription = req.body.eventDescription;
   let SQL = `
   INSERT INTO events (eventsOwner, title, date, location, description)
   VALUES ($1, $2, $3, $4, $5) RETURNING *
@@ -65,16 +78,19 @@ function createEvent (request, response) {
   let SQLguest = `INSERT INTO guests (guestName, eventTitle, eventOwner, isChecked) VALUES ('${app.locals.activeUser}', '${app.locals.activeEvent}', '${app.locals.activeUser}', TRUE);`;
   client.query(SQLguest);
   return client.query(SQL, values)
-    .then( (results) => {
-      // response.render('pages/main/guestList.ejs');
-      guestListRender(request, response);
+    .then( () => {
+      guestListRender(req, res);
+    })
+    .catch(() => {
+      weeWooRender(req, res);
     });
+
 }
 
-app.post('/guestInput', addGuest);
 
-function addGuest (request, response) {
-  let guestName = request.body.guestName;
+/////Guest Page Functions
+function addGuest (req, res) {
+  let guestName = req.body.guestName;
   let eventTitle = app.locals.activeEvent;
   let eventsOwner = app.locals.activeUser;
   let isChecked = false;
@@ -85,23 +101,38 @@ function addGuest (request, response) {
   let values = [guestName, eventTitle, eventsOwner, isChecked];
   client.query(SQL, values)
     .then( (results) => {
-      guestListRender(request, response);
-      // console.log('guest val', results.rows);
-      // response.redirect('/guestList');
+      guestListRender(req, res);
     })
-    .catch(err => console.log(err));
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 }
 
-function deleteGuest (request, response) {
+function deleteGuest (req, res) {
   let SQL = 'DELETE FROM guests where id=$1';
-  let values = [request.params.id];
+  let values = [req.params.id];
   return client.query(SQL, values)
-    .then(() => {
-      guestListRender(request, response);
+    .then((results) => {
+      guestListRender(req, res);
     })
-    .catch(err => console.log(err));
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 }
 
+function guestListRender(req, res) {
+  let SQL = `SELECT * FROM guests WHERE eventOwner = $1 AND eventTitle = $2;`;
+  let values = [app.locals.activeUser, app.locals.activeEvent];
+  client.query(SQL, values)
+    .then( (results) => {
+      res.render('pages/main/guestList', { guests: results.rows});
+    })
+    .catch(() => {
+      weeWooRender(req, res);
+    });
+}
+
+/////Menu Render page functions
 function savedDrinksRender(req, res) {
   let SQL = `SELECT DISTINCT
     a.drinkTitle AS a_drink,
@@ -121,26 +152,22 @@ function savedDrinksRender(req, res) {
     .then(data => {
       res.render('pages/main/menuRender.ejs', { databaseResults: data.rows, });
     })
-    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 }
 
 function deleteDrink(req, res) {
-  let SQL = `DELETE FROM drinks WHERE id = $1`;
-  let values = [req.params.id];
+  let SQL = `DELETE FROM drinks WHERE drinkTitle = $1`;
+  let values = [req.params.drinkTitle];
 
   return client.query(SQL, values)
-    .then(() => {
+    .then((data) => {
       savedDrinksRender(req, res);
     })
-    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
-}
-
-function homePage(req, res) {
-  res.render('pages/index.ejs');
-}
-
-function eventRender(req, res) {
-  res.render('pages/main/event.ejs');
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 }
 
 function drinksTableDB (req, res) {
@@ -158,23 +185,39 @@ function drinksTableDB (req, res) {
     .then(() => {
       return client.query(SQL2, values2)
         .then((data) => {
-        })
+        });
     })
     .then(() => {
       savedDrinksRender(req, res);
     })
-    .catch(() => errorHandler('Error 500 ! Something has gone!', req, res));
-}
-
-function guestListRender(req, res) {
-  let SQL = `SELECT * FROM guests WHERE eventOwner = $1 AND eventTitle = $2;`;
-  let values = [app.locals.activeUser, app.locals.activeEvent];
-  client.query(SQL, values)
-    .then( (results) => {
-      res.render('pages/main/guestList', { guests: results.rows});
+    .catch(() => {
+      weeWooRender(req, res);
     });
 }
 
+function drinkRender(req, res) {
+  let drink = req.body.search;
+  let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`;
+  superagent.get(url)
+    .then(data => {
+      let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
+      res.render('pages/main/drinkSearch', {searchResults: drinkResults });
+    })
+    .catch(() => {
+      weeWooRender(req, res);
+    });
+}
+
+function Drinks(info) {
+  this.id = info.idDrink;
+  this.name = info.strDrink;
+  this.glass = info.strGlass;
+  this.image = info.strDrinkThumb;
+  this.instructions = info.strInstructions;
+  this.ingredient = [info.strIngredient1, info.strIngredient2, info.strIngredient3, info.strIngredient4, info.strIngredient5, info.strIngredient6, info.strIngredient7, info.strIngredient8, info.strIngredient9, info.strIngredient10, info.strIngredient11];
+}
+
+/////Public Page Functions
 function publicPage(req, res) {
   let eventSQL = `SELECT eventsOwner, title, to_timestamp(TRUNC(CAST(date AS bigint))) AT time zone 'utc' AS date, location, description FROM events WHERE eventsOwner = $1 AND title = $2;`;
   let guestsSQL = `SELECT * FROM guests WHERE eventOwner = $1 AND eventTitle = $2;`;
@@ -196,61 +239,29 @@ function publicPage(req, res) {
     .then( events => {
       client.query(guestsSQL, values)
         .then(guests => {
-          client.query(menuSQL, values)
+          return client.query(menuSQL, values)
             .then(menu => {
-              console.log(events.rows);
-              return res.render('pages/main/publicView', {events: events.rows, guests: guests.rows, menu: menu.rows})
-
-            })
-        })
-      })
-
-  // client.query(eventSQL, eventValues)
-  //   .then( results => {
-  //     return res.render('pages/main/publicView', {results: results.rows[0]});
-  //   })
-  //   .catch(err => console.log(err));
-}
-
-function drinkRender(req, res) {
-  let drink = req.body.search;
-  console.log(drink);
-  let url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`;
-  console.log(url);
-  superagent.get(url)
-    .then(data => {
-      // console.log(data);
-      let drinkResults = data.body.drinks.map(obj => new Drinks(obj));
-      res.render('pages/main/drinkSearch', {searchResults: drinkResults });
+              return res.render('pages/main/publicView', {events: events.rows, guests: guests.rows, menu: menu.rows});
+            });
+        });
     })
-    .catch(err => console.log(err));
+    .catch(() => {
+      weeWooRender(req, res);
+    });
 }
 
-function Drinks(info) {
-  this.id = info.idDrink;
-  this.name = info.strDrink;
-  this.glass = info.strGlass;
-  this.image = info.strDrinkThumb;
-  this.instructions = info.strInstructions;
-  this.ingredient = [info.strIngredient1, info.strIngredient2, info.strIngredient3, info.strIngredient4, info.strIngredient5, info.strIngredient6, info.strIngredient7, info.strIngredient8, info.strIngredient9, info.strIngredient10, info.strIngredient11];
+/////Error Page Function
+function weeWooRender(req, res) {
+  res.status(500).render('pages/errorPage');
 }
 
-app.get('*', (req, response) => response.status(404).send('This route does not exist'));
+// Convert to unix time
+Date.prototype.unixTime = function(){return this.getTime() / 1000 | 0;};
 
-function errorHandler(error, req, response) {
-  response.status(500).send(error);
-}
-// Still need errorPage.ejs
-
-// function startServer(){
-//   const PORT = process.env.PORT || 3000;
-//   app.listen(PORT, () => console.log(`Server up on port ${PORT}`));
-// }
-// startServer();
+app.get('*', (req, res) => res.status(404).send('This route does not exist'));
 
 client.connect()
   .then(() => {
     app.listen(process.env.PORT, () => console.log(`up on ${process.env.PORT}`));
   })
   .catch(() => console.log('port client issue'));
-
