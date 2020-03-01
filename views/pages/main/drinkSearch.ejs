@@ -20,7 +20,7 @@
           <h2>Look for a drink!!</h2>
           <form action="/menuRender/search" method="POST" >
           <input type="text" name="search" placeholder="Enter A Drink">
-          <button type="submit">Take A Look</button>
+          <button id="drinkButton" type="submit">Take A Look</button>
           </form>
         </div>
         <section id="menuSection">
@@ -44,7 +44,7 @@
                     <input type="hidden" name="drink_image" value="<%- obj.image %>">
                     <input type="hidden" name="drink_instructions" value="<%- obj.instructions%>">
                     <input type="hidden" name="drink_glass" value="<%-obj.glass%>">
-                    <button >Save To Menu</button>
+                    <button id="saveMenuButton">Save To Menu</button>
                   </form>
                 </div>
                 <% }) %>
